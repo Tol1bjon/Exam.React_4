@@ -3,12 +3,14 @@ import { Box, Typography, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { NavLink, useNavigate } from 'react-router';
 import { getBlogItems } from '../../API/contentData';
+import { useLanguage } from '../../context/LanguageContext';
 
 const Blog = () => {
     const [blogs, setBlogs] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 12; // Количество карточек на одной странице
     const navigate = useNavigate()
+    const { t } = useLanguage();
 
     async function fetchBlogs() {
         try {
@@ -23,7 +25,6 @@ const Blog = () => {
         fetchBlogs();
     }, []);
 
-    // Логика пагинации (вычисление элементов для текущей страницы)
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = blogs.slice(indexOfFirstItem, indexOfLastItem);
@@ -45,12 +46,12 @@ const Blog = () => {
                 overflowX: 'hidden'
             }}
         >
-            {/* Хлебные крошки */}
+            
             <Typography sx={{ fontSize: '14px', color: '#7E929D', mb: 2 }}>
-                Главная &nbsp;&gt;&nbsp; <Box component="span" sx={{ color: '#334D5C' }}>Блог</Box>
+                {t('Главная')} &nbsp;&gt;&nbsp; <Box component="span" sx={{ color: '#334D5C' }}>{t('Блог')}</Box>
             </Typography>
 
-            {/* Заголовок страницы */}
+            
             <Typography 
                 variant="h4" 
                 sx={{ 
@@ -60,10 +61,10 @@ const Blog = () => {
                     fontSize: { xs: '24px', md: '36px' }
                 }}
             >
-                Блог
+                {t('Блог')}
             </Typography>
 
-            {/* Сетка карточек блога */}
+            
             <Box 
                 sx={{ 
                     display: 'grid',
@@ -91,7 +92,7 @@ const Blog = () => {
                             boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.04)'
                         }}
                     >
-                        {/* Картинка */}
+                        
                         <Box 
                             component={NavLink} 
                             to={`/blog/${item.id}`}
@@ -111,7 +112,7 @@ const Blog = () => {
                             />
                         </Box>
 
-                        {/* Название (title) */}
+                        
                         <Typography 
                             component={NavLink}
                             to={`/blog/${item.id}`}
@@ -123,10 +124,10 @@ const Blog = () => {
                                 '&:hover': { color: '#5BC0EB' }
                             }}
                         >
-                            {item.title}
+                            {t(item.title)}
                         </Typography>
 
-                        {/* Описание (instructure) */}
+                        
                         <Typography 
                             sx={{ 
                                 fontSize: '13px',
@@ -135,10 +136,10 @@ const Blog = () => {
                                 flexGrow: 1
                             }}
                         >
-                            {item.instructure}
+                            {t(item.instructure)}
                         </Typography>
 
-                        {/* Нижняя часть карточки: Кнопка "Читать" и дата (data) */}
+                        
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 'auto', pt: 1 }}>
                             <Button 
                                 component={NavLink}
@@ -155,7 +156,7 @@ const Blog = () => {
                                     '&:hover': { borderColor: '#334D5C', backgroundColor: 'transparent' }
                                 }}
                             >
-                                Читать
+                                {t('Читать')}
                             </Button>
                             
                             <Typography sx={{ fontSize: '12px', color: '#7E929D' }}>
@@ -166,7 +167,7 @@ const Blog = () => {
                 ))}
             </Box>
 
-            {/* Элементы пагинации (цифры страниц и кнопка "Дальше") */}
+            
             {totalPages > 1 && (
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 4 }}>
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
@@ -191,7 +192,7 @@ const Blog = () => {
                         </Button>
                     ))}
 
-                    {/* Кнопка "Дальше" */}
+                    
                     {currentPage < totalPages && (
                         <Button
                             onClick={() => setCurrentPage(prev => prev + 1)}
@@ -203,7 +204,7 @@ const Blog = () => {
                                 '&:hover': { backgroundColor: 'transparent', color: '#5BC0EB' }
                             }}
                         >
-                            Дальше &gt;
+                            {t('Дальше')} &gt;
                         </Button>
                     )}
                 </Box>

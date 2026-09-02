@@ -38,7 +38,6 @@ const Section6Home = () => {
         getCards();
     }, []);
 
-    // Функция переключения состояния лайка для конкретной карточки
     const handleAddToCartClick = (product) => {
         if (!user) {
             setShowAuthModal(true);
@@ -90,7 +89,7 @@ const Section6Home = () => {
                 open={showAuthModal}
                 onClose={() => setShowAuthModal(false)}
             />
-            {/* Заголовок секции */}
+            
             <Typography 
                 variant="h4" 
                 sx={{ 
@@ -107,7 +106,7 @@ const Section6Home = () => {
                 {t('Выгодное предложение')}
             </Typography>
 
-            {/* Контейнер слайдера с прокруткой */}
+            
             <Box 
                 ref={sliderRef}
                 sx={{ 
@@ -154,7 +153,7 @@ const Section6Home = () => {
                                 flexShrink: 0
                             }}
                         >
-                            {/* Верхняя строка: бейдж NEW и иконка избранного */}
+                            
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
                                 <Box 
                                     sx={{ 
@@ -191,13 +190,13 @@ const Section6Home = () => {
                                 </Box>
                             </Box>
 
-                            {/* Картинка товара */}
+                            
                             <Box 
                                 component={motion.img}
                                 whileHover={{ scale: 1.05 }}
                                 transition={{ type: 'spring', stiffness: 300 }}
                                 src={el.image} 
-                                alt={el.title} 
+                                alt={t(el.title)}
                                 sx={{ 
                                     width: '100%', 
                                     height: '160px', 
@@ -206,7 +205,7 @@ const Section6Home = () => {
                                 }} 
                             />
 
-                            {/* Описание товара */}
+                            
                             <Box sx={{ textAlign: 'center', mb: 2 }}>
                                 <Typography sx={{ fontSize: { xs: '13px', md: '14px' }, fontWeight: '500', color: '#334D5C', mb: 1, lineHeight: 1.3, height: '36px', overflow: 'hidden' }}>
                                     {el.title || 'Коляска Riko Basic, Польша'}
@@ -216,7 +215,7 @@ const Section6Home = () => {
                                 </Typography>
                             </Box>
 
-                            {/* Кнопки действия */}
+                            
                             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, alignItems: 'center' }}>
                                 <Box component={motion.div} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                                     <Box onClick={() => handleAddToCartClick(el)} sx={{ cursor: 'pointer', width: '100%', display: 'flex', justifyContent: 'center' }}>
@@ -243,7 +242,7 @@ const Section6Home = () => {
                 })}
             </Box>
 
-            {/* Стрелочки управления слайдером */}
+            
             <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 4 }}>
                 <Box 
                     onClick={handleScrollLeft}

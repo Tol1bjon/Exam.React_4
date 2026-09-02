@@ -16,9 +16,6 @@ import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
 import { useLanguage } from '../context/LanguageContext';
 
-// -----------------------------------------------------------------------
-// Статические данные
-// -----------------------------------------------------------------------
 const NAV_LINKS = [
   { label: 'sale', to: 'Sale' },
   { label: 'about', to: '/' },
@@ -80,25 +77,21 @@ const COLORS = {
 };
 
 const Header = () => {
-  // Контекст аутентификации
   const { user, login, logout } = useContext(AuthContext);
   const { getTotalItems } = useContext(CartContext);
   const cartCount = getTotalItems();
   const navigate = useNavigate();
 
-  // Десктопные состояния
   const [catalogOpen, setCatalogOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState(1);
   const { language, setLanguage, t } = useLanguage();
 
-  // Состояния для входа
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [loginError, setLoginError] = useState('');
 
-  // Мобильные состояния
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileCatalogOpen, setMobileCatalogOpen] = useState(false);
   const [mobileProfileOpen, setMobileProfileOpen] = useState(false);
@@ -174,9 +167,9 @@ const Header = () => {
   return (
     <Box sx={{ position: 'relative', bgcolor: '#FFFFFF', zIndex: 1200 }}>
 
-      {/* =================================================================== */}
-      {/* МОБИЛЬНАЯ ВЕРСИЯ                                                   */}
-      {/* =================================================================== */}
+      
+      
+      
       <Box
         sx={{
           display: { xs: 'flex', md: 'none' },
@@ -203,7 +196,7 @@ const Header = () => {
               sx={{ width: 38, height: 38 }}
             />
             <Typography sx={{ fontSize: 12, color: COLORS.text, fontWeight: 500, lineHeight: 1.2 }}>
-              Онлайн гипермаркет<br />товаров для детей
+              {t('Онлайн гипермаркет')}<br />{t('товаров для детей')}
             </Typography>
           </Box>
 
@@ -255,13 +248,13 @@ const Header = () => {
         >
           <SearchIcon sx={{ color: COLORS.textMuted, mr: 1 }} fontSize="small" />
           <InputBase
-            placeholder="Я хочу купить..."
+            placeholder={t('Я хочу купить...')}
             sx={{ flex: 1, fontSize: 14, color: COLORS.text }}
           />
         </Box>
       </Box>
 
-      {/* Мобильная модалка меню */}
+      
       <Drawer
         anchor="left"
         open={mobileMenuOpen}
@@ -362,12 +355,12 @@ const Header = () => {
         <Box sx={{ mt: 4, display: 'flex', alignItems: 'center', gap: 1 }}>
           <LocationOnOutlinedIcon fontSize="small" sx={{ color: COLORS.textMuted }} />
           <Typography sx={{ fontSize: 14, color: COLORS.textMuted }}>
-            Город: <Box component="span" sx={{ color: COLORS.primary, fontWeight: 500 }}>Москва</Box>
+            {t('Город:')} <Box component="span" sx={{ color: COLORS.primary, fontWeight: 500 }}>{t('Москва')}</Box>
           </Typography>
         </Box>
       </Drawer>
 
-      {/* Мобильная модалка Каталога */}
+      
       <Drawer
         anchor="left"
         open={mobileCatalogOpen}
@@ -478,7 +471,7 @@ const Header = () => {
         )}
       </Drawer>
 
-      {/* Мобильная модалка профиля */}
+      
       <Drawer
         anchor="left"
         open={mobileProfileOpen}
@@ -523,7 +516,7 @@ const Header = () => {
               cursor: 'pointer',
             }}
           >
-            Мои заказы
+            {t('Мои заказы')}
           </Typography>
           <Typography
             onClick={() => navigate('/favorites')}
@@ -567,14 +560,14 @@ const Header = () => {
             }}
           >
             <LogoutIcon sx={{ fontSize: 18 }} />
-            Выход
+            {t('Выход')}
           </Box>
         </Box>
       </Drawer>
 
-      {/* =================================================================== */}
-      {/* ДЕСКТОПНАЯ ВЕРСИЯ                                                   */}
-      {/* =================================================================== */}
+      
+      
+      
       <Box
         sx={{
           display: { xs: 'none', md: 'flex' },
@@ -622,7 +615,7 @@ const Header = () => {
               '&:hover': { bgcolor: '#4CB2D1' },
             }}
           >
-            Каталог товаров
+            {t('Каталог товаров')}
           </Button>
 
           <AnimatePresence>
@@ -726,7 +719,7 @@ const Header = () => {
         >
           <SearchIcon sx={{ color: COLORS.textMuted, mr: 1 }} fontSize="small" />
           <InputBase
-            placeholder="Я хочу купить..."
+            placeholder={t('Я хочу купить...')}
             sx={{ flex: 1, fontSize: 14, color: COLORS.text }}
           />
           <Button
@@ -742,13 +735,13 @@ const Header = () => {
               '&:hover': { bgcolor: '#4CB2D1' },
             }}
           >
-            Найти
+            {t('Найти')}
           </Button>
         </Box>
 
         <Box sx={{ flex: 1 }} />
 
-        {/* Профиль или Логин */}
+        
         {user ? (
           <Box ref={profileRef} sx={{ position: 'relative', flexShrink: 0 }}>
             <Box
@@ -815,7 +808,7 @@ const Header = () => {
                         cursor: 'pointer',
                       }}
                     >
-                      Мои заказы
+                      {t('Мои заказы')}
                     </Typography>
                     <Typography
                       component={motion.div}
@@ -863,7 +856,7 @@ const Header = () => {
                       }}
                     >
                       <LogoutIcon sx={{ fontSize: 16 }} />
-                      Выход
+                      {t('Выход')}
                     </Box>
                   </Box>
                 </motion.div>
@@ -887,7 +880,7 @@ const Header = () => {
             >
               <PersonOutlineIcon fontSize="small" sx={{ color: COLORS.primary }} />
               <Typography sx={{ fontSize: 14, whiteSpace: 'nowrap' }}>
-                Войти в личный кабинет
+                {t('Войти в личный кабинет')}
               </Typography>
             </Box>
 
@@ -912,7 +905,7 @@ const Header = () => {
                 >
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
                     <Typography sx={{ fontWeight: 700, color: COLORS.text, fontSize: 16 }}>
-                      Вход в аккаунт
+                      {t('Вход в аккаунт')}
                     </Typography>
                     <IconButton size="small" onClick={() => setLoginOpen(false)}>
                       <CloseIcon fontSize="small" />
@@ -922,7 +915,7 @@ const Header = () => {
                   <InputBase
                     fullWidth
                     type="email"
-                    placeholder="Электронный адрес"
+                    placeholder={t('Электронный адрес')}
                     value={loginEmail}
                     onChange={(e) => {
                       setLoginEmail(e.target.value);
@@ -941,7 +934,7 @@ const Header = () => {
                   <InputBase
                     fullWidth
                     type="password"
-                    placeholder="Пароль"
+                    placeholder={t('Пароль')}
                     value={loginPassword}
                     onChange={(e) => {
                       setLoginPassword(e.target.value);
@@ -964,7 +957,7 @@ const Header = () => {
                       animate={{ opacity: 1, y: 0 }}
                     >
                       <Typography sx={{ fontSize: 12, color: '#ff6b6b', mb: 2 }}>
-                        {loginError}
+                        {t(loginError)}
                       </Typography>
                     </motion.div>
                   )}
@@ -985,7 +978,7 @@ const Header = () => {
                         '&:hover': { bgcolor: '#4CB2D1' },
                       }}
                     >
-                      Войти
+                      {t('Войти')}
                     </Button>
                     <Typography
                       component={motion.div}
@@ -1002,7 +995,7 @@ const Header = () => {
                         fontWeight: 500,
                       }}
                     >
-                      Восстановить пароль?
+                      {t('Восстановить пароль?')}
                     </Typography>
                   </Box>
 
@@ -1022,7 +1015,7 @@ const Header = () => {
                       fontWeight: 500,
                     }}
                   >
-                    Нет аккаунта? Зарегистрироваться
+                    {t('Нет аккаунта? Зарегистрироваться')}
                   </Typography>
                 </motion.div>
               )}
@@ -1163,7 +1156,7 @@ const Header = () => {
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, cursor: 'pointer', flexShrink: 0 }}>
             <LocationOnOutlinedIcon fontSize="small" sx={{ color: COLORS.textMuted }} />
             <Typography sx={{ fontSize: 14, color: COLORS.textMuted }}>
-              Город: <Box component="span" sx={{ color: COLORS.primary }}>Москва</Box>
+              {t('Город:')} <Box component="span" sx={{ color: COLORS.primary }}>{t('Москва')}</Box>
             </Typography>
           </Box>
         </Box>

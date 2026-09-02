@@ -15,7 +15,7 @@ const NotFound = () => {
                 py: 3
             }}
         >
-            {/* Шапка с логотипом */}
+            
             <Box 
                 component={Link} 
                 to="/" 
@@ -46,7 +46,7 @@ const NotFound = () => {
                 </Typography>
             </Box>
 
-            {/* Основной контент 404 */}
+            
             <Box 
                 sx={{ 
                     display: 'flex', 

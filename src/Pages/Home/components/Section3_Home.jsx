@@ -41,7 +41,7 @@ const Section3Home = () => {
                 overflowX: 'hidden' // Жестко пресекает появление горизонтального скролла
             }}
         >
-            {/* Заголовок секции */}
+            
             <Typography 
                 variant="h4" 
                 sx={{ 
@@ -58,7 +58,7 @@ const Section3Home = () => {
                 {t('Популярные категории')}
             </Typography>
 
-            {/* Контейнер карточек */}
+            
             <Box 
                 sx={{ 
                     display: 'flex', 
@@ -92,13 +92,13 @@ const Section3Home = () => {
                             overflow: 'hidden',
                         }}
                     >
-                        {/* Левая часть: текст и кнопка */}
+                        
                         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', maxWidth: '160px' }}>
                             <Box>
                                 <Typography sx={{ fontSize: '20px', fontWeight: 'bold', color: '#334D5C', mb: 1, lineHeight: 1.2 }}>
-                                    {el.title}
+                                        {t(el.title)}
                                 </Typography>
-                                {/* Закомментированный блок с описанием можно вернуть при необходимости */}
+                                
                             </Box>
                             
                             <Box component={motion.div} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -109,13 +109,13 @@ const Section3Home = () => {
                             </Box>
                         </Box>
 
-                        {/* Правая часть: картинка товара */}
+                        
                         <Box 
                             component={motion.img}
                             whileHover={{ scale: 1.08 }}
                             transition={{ type: 'spring', stiffness: 300 }}
                             src={el.image} 
-                            alt={el.title} 
+                            alt={t(el.title)}
                             sx={{ 
                                 width: { xs: '130px', sm: '150px' }, 
                                 height: { xs: '130px', sm: '150px' }, 

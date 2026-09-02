@@ -164,7 +164,7 @@ const Registration = () => {
         </Typography>
 
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}>
-          {/* Имя */}
+          
           <Box>
             <TextField
               fullWidth
@@ -192,7 +192,7 @@ const Registration = () => {
             )}
           </Box>
 
-          {/* Email */}
+          
           <Box>
             <TextField
               fullWidth
@@ -221,7 +221,7 @@ const Registration = () => {
             )}
           </Box>
 
-          {/* Пароль */}
+          
           <Box>
             <TextField
               fullWidth
@@ -250,7 +250,7 @@ const Registration = () => {
             )}
           </Box>
 
-          {/* Повторить пароль */}
+          
           <Box>
             <TextField
               fullWidth
@@ -279,7 +279,7 @@ const Registration = () => {
             )}
           </Box>
 
-          {/* Блок для капчи */}
+          
           <Box 
             sx={{ 
               border: `1px solid ${COLORS.border}`, 
@@ -297,7 +297,7 @@ const Registration = () => {
             </Typography>
           </Box>
 
-          {/* Чекбокс соглашения */}
+          
           <FormControlLabel 
             control={
               <Checkbox 

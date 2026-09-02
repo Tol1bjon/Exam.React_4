@@ -19,7 +19,7 @@ const Optovim = () => {
                 boxSizing: 'border-box'
             }}
         >
-            {/* Хлебные крошки */}
+            
             <Typography sx={{ fontSize: '14px', color: '#7E929D', mb: 2 }}>
                 <Box component={NavLink} to="/cart" sx={{ color: '#7E929D', textDecoration: 'none', '&:hover': { color: '#334D5C' } }}>
                     Корзина
@@ -28,7 +28,7 @@ const Optovim = () => {
                 <Box component="span" sx={{ color: '#334D5C' }}>Оптовым клиентам</Box>
             </Typography>
 
-            {/* Заголовок страницы */}
+            
             <Typography 
                 variant="h4" 
                 sx={{ 
@@ -51,7 +51,7 @@ const Optovim = () => {
                 Заполните форму и мы отправим Вам выгодные условия партнерства
             </Typography>
 
-            {/* Форма */}
+            
             <Box 
                 component="form" 
                 sx={{ 
@@ -116,7 +116,7 @@ const Optovim = () => {
                     }}
                 />
 
-                {/* Блок для капчи */}
+                
                 <Box 
                     sx={{ 
                         border: '1px solid #CCD6DD', 

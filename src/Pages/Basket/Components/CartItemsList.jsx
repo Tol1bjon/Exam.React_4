@@ -5,6 +5,7 @@ import { CartContext } from '../../../context/CartContext';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { useLanguage } from '../../../context/LanguageContext';
 
 const COLORS = {
   primary: '#89D2F8',
@@ -17,6 +18,7 @@ const COLORS = {
 
 const CartItemsList = ({ items }) => {
   const { removeFromCart, updateQuantity } = useContext(CartContext);
+  const { t } = useLanguage();
 
   const handleDelete = (id) => {
     removeFromCart(id);
@@ -66,12 +68,12 @@ const CartItemsList = ({ items }) => {
                 },
               }}
             >
-              {/* Product Image */}
+              
               <Box
                 component={motion.img}
                 whileHover={{ scale: 1.05 }}
                 src={item.image}
-                alt={item.title}
+                alt={t(item.title)}
                 sx={{
                   width: 100,
                   height: 100,
@@ -83,7 +85,7 @@ const CartItemsList = ({ items }) => {
                 }}
               />
 
-              {/* Product Info */}
+              
               <Box sx={{ flex: 1, minWidth: 0 }}>
                 <Typography
                   sx={{
@@ -94,7 +96,7 @@ const CartItemsList = ({ items }) => {
                     lineHeight: 1.4,
                   }}
                 >
-                  {item.title}
+                  {t(item.title)}
                 </Typography>
 
                 <Typography
@@ -104,10 +106,10 @@ const CartItemsList = ({ items }) => {
                     mb: 1.5,
                   }}
                 >
-                  Артикул: {item.id}
+                  {t('Артикул:')} {item.id}
                 </Typography>
 
-                {/* Quantity Control */}
+                
                 <Box
                   sx={{
                     display: 'flex',
@@ -146,7 +148,7 @@ const CartItemsList = ({ items }) => {
                 </Box>
               </Box>
 
-              {/* Price & Delete */}
+              
               <Box
                 sx={{
                   display: 'flex',
@@ -164,7 +166,7 @@ const CartItemsList = ({ items }) => {
                       mb: 0.5,
                     }}
                   >
-                    За 1 шт.
+                    {t('За 1 шт.')}
                   </Typography>
                   <Typography
                     sx={{
@@ -185,7 +187,7 @@ const CartItemsList = ({ items }) => {
                       mb: 0.5,
                     }}
                   >
-                    Всего
+                    {t('Всего')}
                   </Typography>
                   <Typography
                     sx={{

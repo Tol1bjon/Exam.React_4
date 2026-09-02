@@ -61,7 +61,7 @@ const AuthRequiredModal = ({ open, onClose, onLogin, onRegister }) => {
               position: 'relative',
             }}
           >
-            {/* Close Button */}
+            
             <IconButton
               component={motion.button}
               whileHover={{ rotate: 90 }}
@@ -77,7 +77,7 @@ const AuthRequiredModal = ({ open, onClose, onLogin, onRegister }) => {
               <CloseIcon fontSize="small" />
             </IconButton>
 
-            {/* Icon */}
+            
             <Box
               component={motion.div}
               initial={{ scale: 0 }}
@@ -98,7 +98,7 @@ const AuthRequiredModal = ({ open, onClose, onLogin, onRegister }) => {
               <LockOutlinedIcon sx={{ color: '#FF6B6B', fontSize: 28 }} />
             </Box>
 
-            {/* Title */}
+            
             <Typography
               sx={{
                 fontSize: { xs: 18, sm: 20 },
@@ -111,7 +111,7 @@ const AuthRequiredModal = ({ open, onClose, onLogin, onRegister }) => {
               Требуется вход в аккаунт
             </Typography>
 
-            {/* Message */}
+            
             <Typography
               sx={{
                 fontSize: 13,
@@ -124,7 +124,7 @@ const AuthRequiredModal = ({ open, onClose, onLogin, onRegister }) => {
               Вы не можете ничего класть в корзину или заказать моментально, пока не зайдёте в свой аккаунт. Если у вас нет аккаунта, вы можете зарегистрироваться.
             </Typography>
 
-            {/* Buttons */}
+            
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
               <Button
                 component={motion.button}

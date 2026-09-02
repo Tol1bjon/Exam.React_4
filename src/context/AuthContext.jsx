@@ -7,7 +7,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [cartCount, setCartCount] = useState(0);
 
-  // Инициализируем данные из localStorage при загрузке
   useEffect(() => {
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) {
@@ -20,11 +19,9 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  // Регистрация нового пользователя
   const register = (userData) => {
     const users = JSON.parse(localStorage.getItem('users') || '[]');
     
-    // Проверяем, существует ли уже такой email
     if (users.some(u => u.email === userData.email)) {
       return { success: false, message: 'Пользователь с таким email уже существует' };
     }
@@ -45,7 +42,6 @@ export const AuthProvider = ({ children }) => {
     return { success: true, message: 'Успешная регистрация' };
   };
 
-  // Вход пользователя
   const login = (email, password) => {
     const users = JSON.parse(localStorage.getItem('users') || '[]');
     const foundUser = users.find(u => u.email === email && u.password === password);
@@ -59,7 +55,6 @@ export const AuthProvider = ({ children }) => {
     return { success: true, message: 'Успешный вход' };
   };
 
-  // Восстановление пароля
   const resetPassword = (email) => {
     const users = JSON.parse(localStorage.getItem('users') || '[]');
     const userIndex = users.findIndex(u => u.email === email);
@@ -68,19 +63,16 @@ export const AuthProvider = ({ children }) => {
       return { success: false, message: 'Email не найден' };
     }
 
-    // Генерируем новый пароль
     const newPassword = 'Password' + Math.random().toString(36).substring(7);
     users[userIndex].password = newPassword;
     localStorage.setItem('users', JSON.stringify(users));
 
-    // В реальности здесь должно быть отправка email
     localStorage.setItem('resetEmail', email);
     localStorage.setItem('resetPassword', newPassword);
 
     return { success: true, message: 'Инструкции отправлены на почту' };
   };
 
-  // Выход пользователя
   const logout = () => {
     setUser(null);
     localStorage.removeItem('currentUser');

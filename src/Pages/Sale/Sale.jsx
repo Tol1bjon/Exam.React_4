@@ -3,6 +3,7 @@ import { Box, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import { NavLink, useNavigate } from 'react-router';
 import { getSaleItems } from '../../API/contentData';
+import { useLanguage } from '../../context/LanguageContext';
 
 const Sale = () => {
     const [sale, setSale] = useState([]);
@@ -25,6 +26,7 @@ const Sale = () => {
 
 
     const navigate = useNavigate()
+    const { t } = useLanguage();
 
     return (
         <Box 
@@ -42,12 +44,12 @@ const Sale = () => {
                 overflowX: 'hidden'
             }}
         >
-            {/* Хлебные крошки */}
+            
             <Typography sx={{ fontSize: '14px', color: '#7E929D', mb: 2 }}>
-                Главная &nbsp;&gt;&nbsp; <Box component="span" sx={{ color: '#334D5C' }}>Акции</Box>
+                {t('Главная')} &nbsp;&gt;&nbsp; <Box component="span" sx={{ color: '#334D5C' }}>{t('Акции')}</Box>
             </Typography>
 
-            {/* Заголовок страницы */}
+            
             <Typography 
                 variant="h4" 
                 sx={{ 
@@ -60,10 +62,10 @@ const Sale = () => {
                     fontSize: { xs: '24px', md: '36px' }
                 }}
             >
-                Акции
+                {t('Акции')}
             </Typography>
 
-            {/* Сетка карточек акций */}
+            
             <Box 
                 sx={{ 
                     display: 'grid',
@@ -86,7 +88,7 @@ const Sale = () => {
                             gap: 1.5
                         }}
                     >
-                        {/* Картинка-баннер акционной карточки обернутая в NavLink */}
+                        
                         <Box 
                             component={NavLink} 
                             to={`/Sale/${item.id}`}
@@ -117,12 +119,12 @@ const Sale = () => {
                             />
                         </Box>
 
-                        {/* Дата */}
+                        
                         <Typography sx={{ fontSize: '13px', color: '#7E929D', mt: 0.5 }}>
                             {item.day}
                         </Typography>
 
-                        {/* Название / Заголовок акции обернутый в NavLink */}
+                        
                         <Typography 
                             component={NavLink}
                             to={`/Sale/${item.id}`}
@@ -138,7 +140,7 @@ const Sale = () => {
                                 '&:hover': { color: '#5BC0EB' }
                             }}
                         >
-                            {item.title}
+                            {t(item.title)}
                         </Typography>
                     </Box>
                 ))}

@@ -15,7 +15,6 @@ const Section1 = () => {
                 margin: "auto",
                 px: { xs: 2, md: 4 },
                 display: "flex",
-                // На телефоне текст и картинка идут друг за другом по вертикали (column), на десктопе — в ряд (row)
                 flexDirection: { xs: 'column', md: 'row' },
                 alignItems: "center",
                 justifyContent: "space-between",
@@ -23,7 +22,7 @@ const Section1 = () => {
                 gap: { xs: 4, md: 0 }
             }}>
                 
-                {/* Текстовый блок с анимацией появления */}
+                
                 <Box 
                     component={motion.div}
                     initial={{ opacity: 0, x: -40 }}
@@ -67,7 +66,7 @@ const Section1 = () => {
 
                     <Button text={t('Смотреть')} to={"/"} />
 
-                    {/* Плавающие декоративные круги (на мобилках скрываем или уменьшаем для аккуратности) */}
+                    
                     <Box sx={{ display: { lg: "block", xs: "none" }, position: "absolute", bottom: "100px", right: "770px" }} component={"img"} src={img1} />
                     <Box sx={{ display: { lg: "block", xs: "none" }, position: "absolute", bottom: "60px", right: "540px", width: "20px" }} component={"img"} src={img1} />
                     <Box sx={{ display: { lg: "block", xs: "none" }, position: "absolute", top: "60px", right: "540px", width: "20px" }} component={"img"} src={img1} />
@@ -75,7 +74,7 @@ const Section1 = () => {
                     <Box sx={{ display: { lg: "block", xs: "none" }, position: "absolute", top: "60px", right: "880px", width: "40px" }} component={"img"} src={img1} />
                 </Box>
 
-                {/* Блок с картинкой */}
+                
                 <Box 
                     component={motion.div}
                     initial={{ opacity: 0, scale: 0.94 }}

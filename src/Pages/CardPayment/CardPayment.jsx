@@ -12,7 +12,6 @@ const CardPayment = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const { clearCart } = React.useContext(CartContext);
-  // По умолчанию сразу 'new', чтобы пользователь при входе на страницу сразу видел пустые поля ввода внутри карты
   const [paymentMethod, setPaymentMethod] = useState('new'); 
   const [card, setCard] = useState({ number: '', holder: '', expiry: '', cvv: '' });
   const [errors, setErrors] = useState({});
@@ -140,7 +139,7 @@ const CardPayment = () => {
       <Typography sx={{ color: '#334D5C', fontSize: { xs: 22, md: 26 }, fontWeight: 700, mb: 1 }}>Итого к оплате</Typography>
       <Typography sx={{ color: '#334D5C', fontSize: 26, fontWeight: 600, mb: 4 }}>{formatPrice(total)}</Typography>
 
-      {/* Выбор способа оплаты (оставлен для переключения, но по умолчанию активна Новая карта) */}
+      
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, mb: 3 }}>
         <Box
           onClick={() => setPaymentMethod('saved')}
@@ -164,7 +163,7 @@ const CardPayment = () => {
       </Box>
 
       <Box component="form" onSubmit={pay} sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 4 }}>
-        {/* Левая часть: дизайн банковской карты, в которую пользователь сам вводит ВСЕ данные с нуля */}
+        
         <Box sx={{ flex: 1 }}>
           <Box
             sx={{
@@ -183,7 +182,7 @@ const CardPayment = () => {
               overflow: 'hidden',
             }}
           >
-            {/* Верхний ряд: Чип карты и поле CVC/CVV */}
+            
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <Box
                 sx={{
@@ -220,7 +219,7 @@ const CardPayment = () => {
               </Box>
             </Box>
 
-            {/* Номер карты */}
+            
             <Box>
               <Typography sx={{ fontSize: 10, color: '#9ca3af', mb: 0.5, letterSpacing: 1 }}>НОМЕР КАРТЫ</Typography>
               {paymentMethod === 'new' ? (
@@ -247,7 +246,7 @@ const CardPayment = () => {
               )}
             </Box>
 
-            {/* Нижняя часть карты: Владелец, Срок и Логотип */}
+            
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
               <Box sx={{ flex: 1, pr: 2 }}>
                 <Typography sx={{ fontSize: 9, color: '#9ca3af', letterSpacing: 0.5 }}>ИМЯ ВЛАДЕЛЬЦА</Typography>
@@ -294,7 +293,7 @@ const CardPayment = () => {
                 )}
               </Box>
 
-              {/* Mastercard Circles */}
+              
               <Box sx={{ width: 32, height: 20, position: 'relative', display: 'flex', alignItems: 'center' }}>
                 <Box sx={{ position: 'absolute', left: 0, width: 18, height: 18, borderRadius: '50%', bgcolor: '#EB001B', opacity: 0.9 }} />
                 <Box sx={{ position: 'absolute', left: 10, width: 18, height: 18, borderRadius: '50%', bgcolor: '#F79E1B', opacity: 0.9 }} />
@@ -311,7 +310,7 @@ const CardPayment = () => {
           </Button>
         </Box>
 
-        {/* Правая часть: таймер и безопасность */}
+        
         <Box sx={{ width: { xs: '100%', md: 280 } }}>
           <Typography sx={{ color: '#334D5C', fontWeight: 600, mb: 2 }}>{timeLabel} на оплату заказа</Typography>
           <Typography sx={{ color: '#7E929D', fontSize: 14, mb: 2 }}>

@@ -23,7 +23,7 @@ const Section1Map = () => {
                 boxSizing: 'border-box'
             }}
         >
-            {/* Хлебные крошки */}
+            
             <Typography sx={{ fontSize: '14px', color: '#7E929D', mb: 2 }}>
                 <Box component={NavLink} to="/" sx={{ color: '#7E929D', textDecoration: 'none', '&:hover': { color: '#334D5C' } }}>
                     Главная
@@ -32,7 +32,7 @@ const Section1Map = () => {
                 <Box component="span" sx={{ color: '#334D5C' }}>Контакты</Box>
             </Typography>
 
-            {/* Заголовок страницы */}
+            
             <Typography 
                 variant="h4" 
                 sx={{ 
@@ -45,7 +45,7 @@ const Section1Map = () => {
                 Контакты
             </Typography>
 
-            {/* Основной контент: Две колонки */}
+            
             <Box 
                 sx={{ 
                     display: 'grid', 
@@ -54,7 +54,7 @@ const Section1Map = () => {
                     alignItems: 'start'
                 }}
             >
-                {/* Левая колонка: Контактные данные */}
+                
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                     <Box>
                         <Typography variant="h6" sx={{ color: '#334D5C', fontWeight: 'bold', mb: 1, fontSize: '18px' }}>
@@ -107,7 +107,7 @@ const Section1Map = () => {
                     </Box>
                 </Box>
 
-                {/* Правая колонка: Форма обратной связи */}
+                
                 <Box 
                     component="form" 
                     sx={{ 

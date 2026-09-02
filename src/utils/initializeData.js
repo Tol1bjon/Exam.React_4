@@ -1,4 +1,3 @@
-// Инициализация демо-аккаунтов при первом запуске
 export const initializeDemoAccounts = () => {
   const existingUsers = localStorage.getItem('users');
   

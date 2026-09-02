@@ -13,7 +13,6 @@ import { AuthContext } from '../../../context/AuthContext';
 import { useNavigate } from 'react-router';
 import { useLanguage } from '../../../context/LanguageContext';
 
-// Свайпер
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css';
@@ -87,8 +86,6 @@ const Section2Home = () => {
 
     const handleLoginClick = () => {
         setShowAuthModal(false);
-        // The header login modal will be shown from Header component
-        // This just closes our auth modal
     };
 
     return (
@@ -105,7 +102,7 @@ const Section2Home = () => {
                 onClose={() => setShowAuthModal(false)}
                 onLogin={handleLoginClick}
             />
-            {/* Десктопная версия */}
+            
             <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 3, justifyContent: 'center', overflow: 'visible' }}>
                 {cards.slice(0, 2).map((el, index) => {
                     const isLiked = isFavorited(el.id);
@@ -134,7 +131,7 @@ const Section2Home = () => {
                                 transition: 'background-color 0.3s ease'
                             }}
                         >
-                            {/* Поп-ап на десктопе, сдвинутый правее внутри карточки */}
+                            
                             <AnimatePresence>
                                 {isOpen && (
                                     <Box 
@@ -170,12 +167,12 @@ const Section2Home = () => {
                                         </Typography>
 
                                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
-                                            <img src={el.image} alt={el.title} style={{ width: '50px', height: '50px', objectFit: 'contain' }} />
+                                            <img src={el.image} alt={t(el.title)} style={{ width: '50px', height: '50px', objectFit: 'contain' }} />
                                             <Typography sx={{ fontSize: '11px', color: '#334D5C', lineHeight: 1.2, flex: 1 }}>
-                                                {el.title}
+                                                    {t(el.title)}
                                             </Typography>
                                             
-                                            {/* Счетчик */}
+                                            
                                             <Box sx={{ display: 'flex', alignItems: 'center', border: '1px solid #72B5E8', borderRadius: '8px', px: 1, py: 0.5, gap: 1 }}>
                                                 <button onClick={(e) => handleDecrease(el.id, e)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#72B5E8', fontSize: '14px' }}>-</button>
                                                 <Typography sx={{ fontSize: '12px', fontWeight: 'bold', color: '#334D5C', minWidth: '10px', textAlign: 'center' }}>{count}</Typography>
@@ -232,7 +229,7 @@ const Section2Home = () => {
 
                             <Box sx={{ maxWidth: '250px' }}>
                                 <Typography sx={{ fontSize: '14px', color: '#334D5C', mb: 2, fontWeight: 500, lineHeight: 1.3 }}>
-                                    {el.title}
+                                        {t(el.title)}
                                 </Typography>
                                 <Typography sx={{ fontSize: '18px', fontWeight: 'bold', color: '#72B5E8', mb: 2 }}>
                                     {el.price}
@@ -257,7 +254,7 @@ const Section2Home = () => {
                                 whileHover={{ scale: 1.08, rotate: 2 }}
                                 transition={{ type: 'spring', stiffness: 300 }}
                                 src={el.image} 
-                                alt={el.title} 
+                                alt={t(el.title)}
                                 sx={{ width: '160px', height: '160px', objectFit: 'contain' }} 
                             />
                         </Box>
@@ -265,7 +262,7 @@ const Section2Home = () => {
                 })}
             </Box>
 
-            {/* Мобильная версия (вторая картинка: модалка во весь экран с затенением) */}
+            
             <Box sx={{ display: { xs: 'block', md: 'none' }, px: 2 }}>
                 <Swiper
                     modules={[Pagination]}
@@ -298,7 +295,7 @@ const Section2Home = () => {
                                         textAlign: 'center'
                                     }}
                                 >
-                                    {/* Мобильная модалка на весь экран (как на второй картинке) */}
+                                    
                                     <AnimatePresence>
                                         {isOpen && (
                                             <Box 
@@ -344,13 +341,13 @@ const Section2Home = () => {
                                                     </IconButton>
 
                                                     <Typography sx={{ fontSize: '15px', fontWeight: 500, color: '#334D5C', mb: 2 }}>
-                                                        Товар добавлен в корзину
+                                                        {t('Товар добавлен в корзину')}
                                                     </Typography>
 
-                                                    <img src={el.image} alt={el.title} style={{ width: '100px', height: '100px', objectFit: 'contain', marginBottom: '12px' }} />
+                                                    <img src={el.image} alt={t(el.title)} style={{ width: '100px', height: '100px', objectFit: 'contain', marginBottom: '12px' }} />
 
                                                     <Typography sx={{ fontSize: '12px', color: '#334D5C', mb: 2, px: 1, lineHeight: 1.3 }}>
-                                                        {el.title}
+                                                        {t(el.title)}
                                                     </Typography>
 
                                                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', px: 1, mb: 3 }}>
@@ -382,7 +379,7 @@ const Section2Home = () => {
                                                             '&:hover': { backgroundColor: '#72B5E8', color: '#fff' }
                                                         }}
                                                     >
-                                                        Перейти в корзину
+                                                        {t('Перейти в корзину')}
                                                     </Box>
                                                 </Box>
                                             </Box>
@@ -410,14 +407,14 @@ const Section2Home = () => {
                                     </IconButton>
 
                                     <Typography sx={{ fontSize: '13px', color: '#334D5C', mb: 2, fontWeight: 500, px: 2, lineHeight: 1.3 }}>
-                                        {el.title}
+                                        {t(el.title)}
                                     </Typography>
 
                                     <Box 
                                         component={motion.img} 
                                         whileHover={{ scale: 1.05 }}
                                         src={el.image} 
-                                        alt={el.title} 
+                                        alt={t(el.title)}
                                         sx={{ width: '180px', height: '180px', objectFit: 'contain', mb: 2 }} 
                                     />
 

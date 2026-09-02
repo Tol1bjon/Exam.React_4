@@ -62,7 +62,6 @@ export const CartProvider = ({ children }) => {
         );
         await Promise.all(cartItems.map((item) => axios.post(BasketAPI, item).catch(() => {})));
       } catch {
-        // json-server может быть выключен — localStorage всё равно сохранит корзину
       }
     };
 

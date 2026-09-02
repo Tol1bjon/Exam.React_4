@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router';
 import { CartContext } from '../../../context/CartContext';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
+import { useLanguage } from '../../../context/LanguageContext';
 
 const COLORS = {
   primary: '#89D2F8',
@@ -17,6 +18,7 @@ const COLORS = {
 const CartSummary = ({ totalPrice, totalItems }) => {
   const navigate = useNavigate();
   const { cartItems } = useContext(CartContext);
+  const { t } = useLanguage();
 
   const deliveryPrice = 300;
   const totalWithDelivery = totalPrice + deliveryPrice;
@@ -52,7 +54,7 @@ const CartSummary = ({ totalPrice, totalItems }) => {
         top: { lg: 100 },
       }}
     >
-      {/* Header */}
+      
       <Typography
         sx={{
           fontSize: 16,
@@ -61,14 +63,14 @@ const CartSummary = ({ totalPrice, totalItems }) => {
           mb: 2.5,
         }}
       >
-        Итого
+        {t('Итого')}
       </Typography>
 
-      {/* Price Breakdown */}
+      
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, mb: 2.5 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography sx={{ fontSize: 13, color: COLORS.textMuted }}>
-            Стоимость товаров:
+            {t('Стоимость товаров:')}
           </Typography>
           <Typography sx={{ fontSize: 14, fontWeight: 600, color: COLORS.text }}>
             {totalPrice.toLocaleString('ru-RU')} ₽
@@ -79,7 +81,7 @@ const CartSummary = ({ totalPrice, totalItems }) => {
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <LocalShippingOutlinedIcon sx={{ fontSize: 16, color: COLORS.primary }} />
             <Typography sx={{ fontSize: 13, color: COLORS.textMuted }}>
-              Доставка:
+              {t('Доставка:')}
             </Typography>
           </Box>
           <Typography sx={{ fontSize: 14, fontWeight: 600, color: COLORS.text }}>
@@ -90,7 +92,7 @@ const CartSummary = ({ totalPrice, totalItems }) => {
 
       <Divider sx={{ my: 2, borderColor: COLORS.border }} />
 
-      {/* Total */}
+      
       <Box
         sx={{
           display: 'flex',
@@ -103,7 +105,7 @@ const CartSummary = ({ totalPrice, totalItems }) => {
         }}
       >
         <Typography sx={{ fontSize: 14, fontWeight: 600, color: COLORS.text }}>
-          Итого к оплате:
+          {t('Итого к оплате:')}
         </Typography>
         <Typography
           sx={{
@@ -116,7 +118,7 @@ const CartSummary = ({ totalPrice, totalItems }) => {
         </Typography>
       </Box>
 
-      {/* Action Buttons */}
+      
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
         <Button
           component={motion.button}
@@ -135,7 +137,7 @@ const CartSummary = ({ totalPrice, totalItems }) => {
             '&:hover': { bgcolor: '#4CB2D1' },
           }}
         >
-          Оформить заказ
+          {t('Оформить заказ')}
         </Button>
 
         <Button
@@ -160,11 +162,11 @@ const CartSummary = ({ totalPrice, totalItems }) => {
             },
           }}
         >
-          Продолжить покупки
+          {t('Продолжить покупки')}
         </Button>
       </Box>
 
-      {/* Info Box */}
+      
       <Box
         sx={{
           mt: 3,
@@ -175,9 +177,9 @@ const CartSummary = ({ totalPrice, totalItems }) => {
         }}
       >
         <Typography sx={{ fontSize: 12, color: COLORS.textMuted, lineHeight: 1.6 }}>
-          ✓ Бесплатная доставка при покупке от 5000 ₽ <br />
-          ✓ Возврат товара до 14 дней <br />
-          ✓ Гарантия на все товары
+          ✓ {t('Бесплатная доставка при покупке от 5000 ₽')} <br />
+          ✓ {t('Возврат товара до 14 дней')} <br />
+          ✓ {t('Гарантия на все товары')}
         </Typography>
       </Box>
     </Card>

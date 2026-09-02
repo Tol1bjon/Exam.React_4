@@ -64,7 +64,6 @@ export const FavoritesProvider = ({ children }) => {
         );
         await Promise.all(favorites.map((item) => axios.post(Likes, item).catch(() => {})));
       } catch {
-        // избранное останется в localStorage
       }
     };
 

@@ -172,7 +172,7 @@ const PersonalData = () => {
           border: `1px solid ${COLORS.lightGray}`,
         }}
       >
-        {/* Avatar Section */}
+        
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 4, pb: 4, borderBottom: `1px solid ${COLORS.lightGray}` }}>
           <Box sx={{ position: 'relative', mr: 3 }}>
             <Avatar
@@ -224,7 +224,7 @@ const PersonalData = () => {
           </Box>
         </Box>
 
-        {/* Form Fields */}
+        
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <Typography sx={{ fontSize: '12px', color: COLORS.gray, mb: 1, textTransform: 'uppercase' }}>
@@ -395,7 +395,7 @@ const PersonalData = () => {
           </Grid>
         </Grid>
 
-        {/* Action Buttons */}
+        
         {isEditing && (
           <Box sx={{ display: 'flex', gap: 2, mt: 4 }}>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} style={{ flex: 1 }}>

@@ -32,7 +32,7 @@ const Section8Home = () => {
                 overflowX: 'hidden'
             }}
         >
-            {/* Заголовок секции */}
+            
             <Typography 
                 variant="h4" 
                 sx={{ 
@@ -52,7 +52,7 @@ const Section8Home = () => {
                 {t('Карапуз - это онлайн гипермаркет товаров для детей. С нами вырастают поколения!')}
             </Typography>
 
-            {/* Сетка карточек */}
+            
             <Box 
                 sx={{ 
                     display: 'grid',

@@ -8,6 +8,7 @@ import EmptyCart from './Components/EmptyCart';
 import CartItemsList from './Components/CartItemsList';
 import CartSummary from './Components/CartSummary';
 import Section2_basket from './Components/Section2_basket';
+import { useLanguage } from '../../context/LanguageContext';
 
 const COLORS = {
   primary: '#89D2F8',
@@ -21,6 +22,7 @@ const COLORS = {
 const Basket = () => {
   const { cartItems, clearCart, getTotalPrice, getTotalItems } = useContext(CartContext);
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   return (
     <>
@@ -37,7 +39,7 @@ const Basket = () => {
       }}
     >
       <Box sx={{ maxWidth: 1200, mx: 'auto' }}>
-        {/* Header */}
+        
         <Box sx={{ mb: 4 }}>
           <Typography
             sx={{
@@ -47,7 +49,7 @@ const Basket = () => {
               mb: 1,
             }}
           >
-            В корзине {getTotalItems()} товар{getTotalItems() !== 1 ? 'а' : ''}
+            {t('В корзине')} {getTotalItems()} {t('товар')}
           </Typography>
           <Typography
             sx={{
@@ -55,7 +57,7 @@ const Basket = () => {
               color: COLORS.textMuted,
             }}
           >
-            Проверьте выбранные товары и оформите покупку
+            {t('Проверьте выбранные товары и оформите покупку')}
           </Typography>
         </Box>
 
@@ -70,10 +72,10 @@ const Basket = () => {
               alignItems: 'flex-start',
             }}
           >
-            {/* Items List */}
+            
             <CartItemsList items={cartItems} />
 
-            {/* Summary */}
+            
             <CartSummary totalPrice={getTotalPrice()} totalItems={getTotalItems()} />
           </Box>
         )}

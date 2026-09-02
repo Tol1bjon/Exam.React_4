@@ -9,11 +9,13 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'; // мож
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useProductActions } from '../../../hooks/useProductActions';
 import AuthRequiredModal from '../../../Layout/AuthRequiredModal';
+import { useLanguage } from '../../../context/LanguageContext';
 
 const Section2_basket = () => {
     const [cards, setCards] = useState([]);
     const sliderRef = useRef(null);
     const { handleAddToCart, handleBuyNow, handleFavorite, isFavorited, showAuthModal, setShowAuthModal } = useProductActions();
+    const { t } = useLanguage();
 
     async function getCards() {
         try {
@@ -57,7 +59,7 @@ const Section2_basket = () => {
             }}
         >
             <AuthRequiredModal open={showAuthModal} onClose={() => setShowAuthModal(false)} />
-            {/* Заголовок секции */}
+            
             <Typography 
                 variant="h4" 
                 sx={{ 
@@ -71,10 +73,10 @@ const Section2_basket = () => {
                     fontSize: { xs: '24px', md: '32px' }
                 }}
             >
-                С этим покупают
+                {t('С этим покупают')}
             </Typography>
 
-            {/* Контейнер слайдера с прокруткой */}
+            
             <Box 
                 ref={sliderRef}
                 sx={{ 
@@ -121,7 +123,7 @@ const Section2_basket = () => {
                                 flexShrink: 0
                             }}
                         >
-                            {/* Верхняя строка: бейдж NEW и иконка избранного */}
+                            
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
                                 <Box 
                                     sx={{ 
@@ -158,7 +160,7 @@ const Section2_basket = () => {
                                 </Box>
                             </Box>
 
-                            {/* Картинка товара */}
+                            
                             <Box 
                                 component={motion.img}
                                 whileHover={{ scale: 1.05 }}
@@ -173,20 +175,20 @@ const Section2_basket = () => {
                                 }} 
                             />
 
-                            {/* Описание товара */}
+                            
                             <Box sx={{ textAlign: 'center', mb: 2 }}>
                                 <Typography sx={{ fontSize: { xs: '13px', md: '14px' }, fontWeight: '500', color: '#334D5C', mb: 1, lineHeight: 1.3, height: '36px', overflow: 'hidden' }}>
-                                    {el.title || 'Коляска Riko Basic, Польша'}
+                                    {t(el.title || 'Коляска Riko Basic, Польша')}
                                 </Typography>
                                 <Typography sx={{ fontSize: { xs: '16px', md: '18px' }, fontWeight: 'bold', color: '#5BC0EB' }}>
                                     {el.price ? `${el.price} ₽` : '52 000 ₽'}
                                 </Typography>
                             </Box>
 
-                            {/* Кнопки действия */}
+                            
                             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, alignItems: 'center' }}>
                                 <Box component={motion.div} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                                    <Button onClick={(event) => handleAddToCart(el, 1, event)} text={"В корзину"} />
+                                    <Button onClick={(event) => handleAddToCart(el, 1, event)} text={t('В корзину')} />
                                 </Box>
                                 
                                 <Typography 
@@ -200,7 +202,7 @@ const Section2_basket = () => {
                                         '&:hover': { color: '#334D5C', textDecoration: 'underline' }
                                     }}
                                 >
-                                    Купить в один клик
+                                    {t('Купить в один клик')}
                                 </Typography>
                             </Box>
                         </Box>
@@ -208,7 +210,7 @@ const Section2_basket = () => {
                 })}
             </Box>
 
-            {/* Стрелочки управления слайдером */}
+            
             <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 4 }}>
                 <Box 
                     onClick={handleScrollLeft}

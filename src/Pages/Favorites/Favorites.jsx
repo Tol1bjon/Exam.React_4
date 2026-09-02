@@ -116,7 +116,7 @@ const Favorites = () => {
                     },
                   }}
                 >
-                  {/* Иконка сердца */}
+                  
                   <Box
                     sx={{
                       position: 'absolute',
@@ -145,7 +145,7 @@ const Favorites = () => {
                     </motion.div>
                   </Box>
 
-                  {/* Изображение */}
+                  
                   <CardMedia
                     component="img"
                     height="240"
@@ -160,7 +160,7 @@ const Favorites = () => {
                     }}
                   />
 
-                  {/* Содержание */}
+                  
                   <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                     <Typography
                       gutterBottom
@@ -200,7 +200,7 @@ const Favorites = () => {
                       {product.price} ₽
                     </Typography>
 
-                    {/* Кнопки */}
+                    
                     <Box sx={{ display: 'flex', gap: 1, mt: 'auto' }}>
                       <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} style={{ flex: 1 }}>
                         <Button

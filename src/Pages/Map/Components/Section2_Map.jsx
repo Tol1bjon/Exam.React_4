@@ -3,7 +3,6 @@ import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
 import { Box, Typography } from '@mui/material';
 
 const Section2Map = () => {
-    // Координаты центра Душанбе (например, площадь им. Исмоили Сомони)
     const defaultState = {
         center: [38.5598, 68.7870],
         zoom: 13,
@@ -16,7 +15,7 @@ const Section2Map = () => {
             </Typography>
             <YMaps>
                 <Map defaultState={defaultState} width="100%" height="100%">
-                    {/* Метка на карте для Душанбе */}
+                    
                     <Placemark geometry={[38.5598, 68.7870]} />
                 </Map>
             </YMaps>

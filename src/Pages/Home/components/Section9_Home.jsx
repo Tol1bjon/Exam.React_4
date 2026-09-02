@@ -18,7 +18,6 @@ const Section9Home = () => {
     const handleScrollLeft = () => {
         if (sliderRef.current) {
             const { scrollLeft, clientWidth, scrollWidth } = sliderRef.current;
-            // Если дошли до самого начала (первая картинка), перематываем в самый конец к 6-й
             if (scrollLeft <= 10) {
                 sliderRef.current.scrollTo({ left: scrollWidth, behavior: 'smooth' });
             } else {
@@ -30,7 +29,6 @@ const Section9Home = () => {
     const handleScrollRight = () => {
         if (sliderRef.current) {
             const { scrollLeft, clientWidth, scrollWidth } = sliderRef.current;
-            // Если дошли до конца (после 6-й картинки), циклично перематываем обратно к 1-й
             if (scrollLeft + clientWidth >= scrollWidth - 10) {
                 sliderRef.current.scrollTo({ left: 0, behavior: 'smooth' });
             } else {
@@ -63,7 +61,7 @@ const Section9Home = () => {
                     position: 'relative'
                 }}
             >
-                {/* Левая стрелка */}
+                
                 <Box 
                     onClick={handleScrollLeft}
                     component={motion.div}
@@ -87,7 +85,7 @@ const Section9Home = () => {
                     <ArrowBackIcon sx={{ fontSize: '18px' }} />
                 </Box>
 
-                {/* Контейнер слайдера */}
+                
                 <Box 
                     ref={sliderRef}
                     sx={{ 
@@ -141,7 +139,7 @@ const Section9Home = () => {
                     ))}
                 </Box>
 
-                {/* Правая стрелка */}
+                
                 <Box 
                     onClick={handleScrollRight}
                     component={motion.div}

@@ -3,10 +3,12 @@ import { useParams, NavLink } from 'react-router';
 import { Box, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
    import { getBlogItems } from '../API/contentData';
+import { useLanguage } from '../context/LanguageContext';
 
 const BlogInfo = () => {
     const { id } = useParams();
     const [blogItem, setBlogItem] = useState(null);
+    const { t } = useLanguage();
 
     async function fetchBlog() {
         try {
@@ -42,22 +44,22 @@ const BlogInfo = () => {
                 overflowX: 'hidden'
             }}
         >
-            {/* Хлебные крошки */}
+            
             <Typography sx={{ fontSize: '14px', color: '#7E929D', mb: { xs: 3, md: 4 } }}>
                 <Box component={NavLink} to="/" sx={{ color: '#7E929D', textDecoration: 'none', '&:hover': { color: '#334D5C' } }}>
-                    Главная
+                    {t('Главная')}
                 </Box> 
                 &nbsp;&gt;&nbsp; 
                 <Box component={NavLink} to="/blog" sx={{ color: '#7E929D', textDecoration: 'none', '&:hover': { color: '#334D5C' } }}>
-                    Блог
+                    {t('Блог')}
                 </Box> 
                 &nbsp;&gt;&nbsp; 
                 <Box component="span" sx={{ color: '#334D5C' }}>
-                    {blogItem.title}
+                    {t(blogItem.title)}
                 </Box>
             </Typography>
 
-            {/* Главное изображение (img) */}
+            
             <Box 
                 component="img"
                 src={blogItem.img} 
@@ -72,7 +74,7 @@ const BlogInfo = () => {
                 }}
             />
 
-            {/* Заголовок */}
+            
             <Typography 
                 variant="h4" 
                 sx={{ 
@@ -83,15 +85,15 @@ const BlogInfo = () => {
                     lineHeight: 1.2
                 }}
             >
-                {blogItem.title}
+                {t(blogItem.title)}
             </Typography>
 
-            {/* Дата */}
+            
             <Typography sx={{ fontSize: '14px', color: '#7E929D', mb: 3 }}>
                 {blogItem.data}
             </Typography>
 
-            {/* Основное описание */}
+            
             <Typography 
                 sx={{ 
                     fontSize: { xs: '14px', md: '16px' },
@@ -100,10 +102,10 @@ const BlogInfo = () => {
                     mb: 4
                 }}
             >
-                {blogItem.description}
+                {t(blogItem.description)}
             </Typography>
 
-            {/* Второе изображение (img2) */}
+            
             {blogItem.img2 && (
                 <Box 
                     component="img"
@@ -120,7 +122,7 @@ const BlogInfo = () => {
                 />
             )}
 
-            {/* Цитата с иконкой кавычек */}
+            
             <Box 
                 sx={{ 
                     display: 'flex', 
@@ -143,11 +145,11 @@ const BlogInfo = () => {
                         lineHeight: 1.5
                     }}
                 >
-                    {blogItem.description}
+                    {t(blogItem.description)}
                 </Typography>
             </Box>
 
-            {/* Дополнительный текст (desxription2) */}
+            
             {blogItem.desxription2 && (
                 <Typography 
                     sx={{ 
@@ -157,11 +159,11 @@ const BlogInfo = () => {
                         mb: 6
                     }}
                 >
-                    {blogItem.desxription2}
+                    {t(blogItem.desxription2)}
                 </Typography>
             )}
 
-            {/* Ссылка на следующую статью */}
+            
             <Box sx={{ mt: 4, pt: 2, borderTop: '1px solid #E0E0E0' }}>
                 <Typography 
                     component={NavLink}
@@ -177,7 +179,7 @@ const BlogInfo = () => {
                         '&:hover': { color: '#5BC0EB' }
                     }}
                 >
-                    Читать следующую статью &gt;
+                    {t('Читать следующую статью')} &gt;
                 </Typography>
             </Box>
         </Box>

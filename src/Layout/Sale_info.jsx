@@ -3,11 +3,13 @@ import { Box, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useParams, NavLink, useLocation } from 'react-router';
    import { getSaleItems } from '../API/contentData';
+import { useLanguage } from '../context/LanguageContext';
 
 const SaleInfo = () => {
     const { id } = useParams();
     const location = useLocation();
     const [saleItem, setSaleItem] = useState(location.state || null);
+    const { t } = useLanguage();
 
     useEffect(() => {
         async function fetchSaleItem() {
@@ -47,22 +49,22 @@ const SaleInfo = () => {
                 overflowX: 'hidden'
             }}
         >
-            {/* Хлебные крошки */}
+            
             <Typography sx={{ fontSize: '14px', color: '#7E929D', mb: { xs: 3, md: 4 } }}>
                 <Box component={NavLink} to="/" sx={{ color: '#7E929D', textDecoration: 'none', '&:hover': { color: '#334D5C' } }}>
-                    Главная
+                    {t('Главная')}
                 </Box> 
                 &nbsp;&gt;&nbsp; 
                 <Box component={NavLink} to="/Sale" sx={{ color: '#7E929D', textDecoration: 'none', '&:hover': { color: '#334D5C' } }}>
-                    Акции
+                    {t('Акции')}
                 </Box> 
                 &nbsp;&gt;&nbsp; 
                 <Box component="span" sx={{ color: '#334D5C' }}>
-                    {saleItem.title}
+                    {t(saleItem.title)}
                 </Box>
             </Typography>
 
-            {/* Большой баннер акции */}
+            
             <Box 
                 component="img"
                 src={saleItem.img} 
@@ -77,7 +79,7 @@ const SaleInfo = () => {
                 }}
             />
 
-            {/* Заголовок */}
+            
             <Typography 
                 variant="h4" 
                 sx={{ 
@@ -91,15 +93,15 @@ const SaleInfo = () => {
                     lineHeight: 1.2
                 }}
             >
-                {saleItem.title}
+                {t(saleItem.title)}
             </Typography>
 
-            {/* Дата */}
+            
             <Typography sx={{ fontSize: '14px', color: '#7E929D', mb: 3 }}>
                 {saleItem.day}
             </Typography>
 
-            {/* Основной текст (description) */}
+            
             <Typography 
                 sx={{ 
                     fontSize: { xs: '14px', md: '16px' },
@@ -108,10 +110,10 @@ const SaleInfo = () => {
                     mb: 3
                 }}
             >
-                {saleItem.description}
+                {t(saleItem.description)}
             </Typography>
 
-            {/* Дополнительный текст (description2) */}
+            
             <Typography 
                 sx={{ 
                     fontSize: { xs: '14px', md: '16px' },
@@ -119,7 +121,7 @@ const SaleInfo = () => {
                     lineHeight: 1.6
                 }}
             >
-                {saleItem.description2}
+                {t(saleItem.description2)}
             </Typography>
         </Box>
     );

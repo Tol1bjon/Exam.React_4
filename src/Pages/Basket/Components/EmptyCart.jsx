@@ -3,6 +3,7 @@ import { Box, Typography, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { useLanguage } from '../../../context/LanguageContext';
 
 const COLORS = {
   primary: '#89D2F8',
@@ -14,6 +15,7 @@ const COLORS = {
 
 const EmptyCart = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   return (
     <Box
@@ -53,7 +55,7 @@ const EmptyCart = () => {
           mb: 1,
         }}
       >
-        Ваша корзина пуста
+        {t('Ваша корзина пуста')}
       </Typography>
 
       <Typography
@@ -64,7 +66,7 @@ const EmptyCart = () => {
           maxWidth: 400,
         }}
       >
-        Вы еще ничего не добавили в корзину. Начните покупки прямо сейчас!
+        {t('Вы еще ничего не добавили в корзину. Начните покупки прямо сейчас!')}
       </Typography>
 
       <Button
@@ -84,7 +86,7 @@ const EmptyCart = () => {
           '&:hover': { bgcolor: '#4CB2D1' },
         }}
       >
-        Вернуться в магазин
+        {t('Вернуться в магазин')}
       </Button>
     </Box>
   );
