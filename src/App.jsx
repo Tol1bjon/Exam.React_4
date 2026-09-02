@@ -6,6 +6,7 @@ import NotFound from './Error/NotFound';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { FavoritesProvider } from './context/FavoritesContext';
+import { LanguageProvider } from './context/LanguageContext';
 import { initializeDemoAccounts } from './utils/initializeData';
 
 const Home = lazy(() => import('./Pages/Home/Home'));
@@ -81,12 +82,14 @@ export default function App() {
   ]);
 
   return (
-    <AuthProvider>
-      <CartProvider>
-        <FavoritesProvider>
-          <RouterProvider router={router} />
-        </FavoritesProvider>
-      </CartProvider>
-    </AuthProvider>
+    <LanguageProvider>
+      <AuthProvider>
+        <CartProvider>
+          <FavoritesProvider>
+            <RouterProvider router={router} />
+          </FavoritesProvider>
+        </CartProvider>
+      </AuthProvider>
+    </LanguageProvider>
   );
 }

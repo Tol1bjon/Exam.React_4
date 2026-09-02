@@ -14,18 +14,19 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import logo from '../assets/Mask Group.png';
 import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
+import { useLanguage } from '../context/LanguageContext';
 
 // -----------------------------------------------------------------------
 // Статические данные
 // -----------------------------------------------------------------------
 const NAV_LINKS = [
-  { label: 'Акции', to: 'Sale' },
-  { label: 'О нас', to: '/' },
-  { label: 'Блог', to: 'Blog' },
-  { label: 'Оптовым клиентам', to: 'Optovim' },
-  { label: 'Возврат', to: '/' },
-  { label: 'Оплата и доставка', to: 'Payment_Delivery' },
-  { label: 'Контакты', to: 'Map' },
+  { label: 'sale', to: 'Sale' },
+  { label: 'about', to: '/' },
+  { label: 'blog', to: 'Blog' },
+  { label: 'wholesale', to: 'Optovim' },
+  { label: 'returns', to: '/' },
+  { label: 'paymentDelivery', to: 'Payment_Delivery' },
+  { label: 'contacts', to: 'Map' },
 ];
 
 const CATEGORIES = [
@@ -90,7 +91,7 @@ const Header = () => {
   const [loginOpen, setLoginOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState(1);
-  const [lang, setLang] = useState('RU');
+  const { language, setLanguage, t } = useLanguage();
 
   // Состояния для входа
   const [loginEmail, setLoginEmail] = useState('');
@@ -308,7 +309,7 @@ const Header = () => {
           >
             <PersonOutlineIcon sx={{ color: COLORS.primary, fontSize: 22 }} />
             <Typography sx={{ fontSize: 15, color: COLORS.text }}>
-              Войти в личный кабинет
+              {t('login')}
             </Typography>
           </Box>
         )}
@@ -332,7 +333,7 @@ const Header = () => {
             paddingX: '20px'
           }}
         >
-          Каталог товаров
+          {t('catalog')}
         </Box>
 
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -353,7 +354,7 @@ const Header = () => {
                 pr: '100px'
               }}
             >
-              {link.label}
+              {t(link.label)}
             </Typography>
           ))}
         </Box>
@@ -388,7 +389,7 @@ const Header = () => {
           <>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 3, backgroundColor: '#3E5C76', paddingX: '20px' }}>
               <Typography sx={{ fontSize: 18, fontWeight: 600, color: '#FFFFFF' }}>
-                Каталог товаров
+                {t('catalog')}
               </Typography>
               <IconButton onClick={() => setMobileCatalogOpen(false)} sx={{ color: '#FFFFFF', p: 0.5 }}>
                 <CloseIcon />
@@ -411,7 +412,7 @@ const Header = () => {
                     paddingX: '20px'
                   }}
                 >
-                  {cat.label}
+                    {t(cat.label)}
                 </Box>
               ))}
             </Box>
@@ -434,7 +435,7 @@ const Header = () => {
             </Box>
 
             <Typography sx={{ fontSize: 18, fontWeight: 700, color: '#FFFFFF', mb: 0, backgroundColor: '#3E5C76', px: '20px', pb: 2 }}>
-              {CATEGORIES[mobileActiveCategory].label}
+              {t(CATEGORIES[mobileActiveCategory].label)}
             </Typography>
 
             <Box sx={{ display: 'flex', flexDirection: 'column', overflowY: 'auto', flex: 1, gap: 2.5, backgroundColor: '#3E5C76', px: '20px', pt: 1, pb: 3 }}>
@@ -468,7 +469,7 @@ const Header = () => {
                       fontWeight: 400,
                     }}
                   >
-                    {item}
+                    {t(item)}
                   </Typography>
                 ))
               )}
@@ -535,7 +536,7 @@ const Header = () => {
               cursor: 'pointer',
             }}
           >
-            Мое избранное
+            {t('Мое избранное')}
           </Typography>
           <Typography
             onClick={() => navigate('/personal-data')}
@@ -548,7 +549,7 @@ const Header = () => {
               cursor: 'pointer',
             }}
           >
-            Настройки личных данных
+            {t('Настройки личных данных')}
           </Typography>
           <Box
             component={motion.div}
@@ -664,7 +665,7 @@ const Header = () => {
                           transition: 'background-color 0.2s, color 0.2s',
                         }}
                       >
-                        {cat.label}
+                        {t(cat.label)}
                       </Box>
                     );
                   })}
@@ -699,7 +700,7 @@ const Header = () => {
                               cursor: 'pointer',
                             }}
                           >
-                            {item}
+                            {t(item)}
                           </Typography>
                         ))
                       )}
@@ -829,7 +830,7 @@ const Header = () => {
                         cursor: 'pointer',
                       }}
                     >
-                      Мое избранное
+                      {t('Мое избранное')}
                     </Typography>
                     <Typography
                       component={motion.div}
@@ -844,7 +845,7 @@ const Header = () => {
                         cursor: 'pointer',
                       }}
                     >
-                      Настройки личных данных
+                      {t('Настройки личных данных')}
                     </Typography>
                     <Box
                       component={motion.div}
@@ -1032,7 +1033,7 @@ const Header = () => {
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, flexShrink: 0, bgcolor: COLORS.cream, p: 0.5, borderRadius: '8px', border: `1px solid ${COLORS.border}` }}>
           <Button
             size="small"
-            onClick={() => setLang('RU')}
+            onClick={() => setLanguage('ru')}
             sx={{
               minWidth: 32,
               height: 26,
@@ -1040,16 +1041,16 @@ const Header = () => {
               fontSize: 12,
               fontWeight: 600,
               borderRadius: '6px',
-              bgcolor: lang === 'RU' ? COLORS.primary : 'transparent',
-              color: lang === 'RU' ? '#fff' : COLORS.text,
-              '&:hover': { bgcolor: lang === 'RU' ? COLORS.primary : '#eee' },
+              bgcolor: language === 'ru' ? COLORS.primary : 'transparent',
+              color: language === 'ru' ? '#fff' : COLORS.text,
+              '&:hover': { bgcolor: language === 'ru' ? COLORS.primary : '#eee' },
             }}
           >
             RU
           </Button>
           <Button
             size="small"
-            onClick={() => setLang('EN')}
+            onClick={() => setLanguage('en')}
             sx={{
               minWidth: 32,
               height: 26,
@@ -1057,9 +1058,9 @@ const Header = () => {
               fontSize: 12,
               fontWeight: 600,
               borderRadius: '6px',
-              bgcolor: lang === 'EN' ? COLORS.primary : 'transparent',
-              color: lang === 'EN' ? '#fff' : COLORS.text,
-              '&:hover': { bgcolor: lang === 'EN' ? COLORS.primary : '#eee' },
+              bgcolor: language === 'en' ? COLORS.primary : 'transparent',
+              color: language === 'en' ? '#fff' : COLORS.text,
+              '&:hover': { bgcolor: language === 'en' ? COLORS.primary : '#eee' },
             }}
           >
             EN
@@ -1075,7 +1076,7 @@ const Header = () => {
             sx={{ display: 'flex', alignItems: 'center', gap: 0.7, cursor: 'pointer', color: COLORS.text }}
           >
             <ShoppingCartOutlinedIcon fontSize="small" sx={{ color: COLORS.primary }} />
-            <Typography sx={{ fontSize: 14 }}>Корзина</Typography>
+            <Typography sx={{ fontSize: 14 }}>{t('cart')}</Typography>
           </Box>
           {cartCount > 0 && (
             <Box
@@ -1125,9 +1126,9 @@ const Header = () => {
           }}
         >
           <Typography sx={{ fontSize: 13, color: COLORS.text, fontWeight: 500, whiteSpace: 'nowrap' }}>
-            Онлайн гипермаркет
+            {t('online')}
             <br />
-            товаров для детей
+            {t('childrenGoods')}
           </Typography>
 
           <Box sx={{ display: 'flex', gap: 3 }}>
@@ -1154,7 +1155,7 @@ const Header = () => {
                   '&:hover::after': { width: '100%' },
                 }}
               >
-                {link.label}
+                {t(link.label)}
               </Box>
             ))}
           </Box>
