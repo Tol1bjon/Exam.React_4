@@ -1,0 +1,1 @@
+export const Blog = "http://localhost:3000/Blog";

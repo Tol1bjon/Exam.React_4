@@ -1,0 +1,1 @@
+export const Sale = "http://localhost:3000/Sale"

@@ -1,0 +1,1 @@
+export const Likes = "http://localhost:3000/Likes"

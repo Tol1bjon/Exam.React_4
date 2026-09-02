@@ -1,122 +1,92 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { createBrowserRouter, RouterProvider } from 'react-router'
+import React, { lazy, Suspense, useEffect } from 'react'
+import Layout from './Layout/Layout'
+import { CircularProgress, Box } from '@mui/material';
+import NotFound from './Error/NotFound';
+import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
+import { FavoritesProvider } from './context/FavoritesContext';
+import { initializeDemoAccounts } from './utils/initializeData';
 
-function App() {
-  const [count, setCount] = useState(0)
+const Home = lazy(() => import('./Pages/Home/Home'));
+const Sale = lazy(() => import('./Pages/Sale/Sale'));
+const Sale_info = lazy(() => import('./Layout/Sale_info'));
+const Blog = lazy(() => import('./Pages/Blog/Blog'));
+const Blog_info = lazy(() => import('./Layout/Blog_info'));
+const Payment_Delivery = lazy(() => import('./Pages/Payment_Delivery/Payment_Delivery'));
+const Map = lazy(() => import('./Pages/Map/Map'));
+const Optovim = lazy(() => import('./Pages/Optovim/Optovim'));
+const RecoveryPassword = lazy(() => import('./Pages/Recovery_Password/Recovery_Password'));
+const ThankYou = lazy(() => import('./Pages/Recovery_Password/ThankYou'));
+const Registration = lazy(() => import('./Pages/Recovery_Password/Registration'));
+const Basket = lazy(() => import('./Pages/Basket/Basket'));
+const ChildrenFurniture = lazy(() => import('./Pages/ChildrenFurniture/ChildrenFurniture'));
+const FurnitureCategory = lazy(() => import('./Pages/ChildrenFurniture/FurnitureCategory'));
+const ProductInfo = lazy(() => import('./Pages/Product/ProductInfo'));
+const Favorites = lazy(() => import('./Pages/Favorites/Favorites'));
+const PersonalData = lazy(() => import('./Pages/PersonalData/PersonalData'));
+const Checkout = lazy(() => import('./Pages/Checkout/Checkout'));
+const CardPayment = lazy(() => import('./Pages/CardPayment/CardPayment'));
+
+const PageLoader = ({ children }) => (
+  <Suspense
+    fallback={
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+        <CircularProgress aria-label="Loading…" />
+      </Box>
+    }
+  >
+    {children}
+  </Suspense>
+);
+
+export default function App() {
+  useEffect(() => {
+    initializeDemoAccounts();
+  }, []);
+
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Layout />,
+      children: [
+        { index: true, element: <PageLoader><Home /></PageLoader> },
+        { path: 'Map', element: <PageLoader><Map /></PageLoader> },
+        { path: 'Sale', element: <PageLoader><Sale /></PageLoader> },
+        { path: 'Sale/:id', element: <PageLoader><Sale_info /></PageLoader> },
+        { path: 'Blog', element: <PageLoader><Blog /></PageLoader> },
+        { path: 'Blog/:id', element: <PageLoader><Blog_info /></PageLoader> },
+        { path: 'Payment_Delivery', element: <PageLoader><Payment_Delivery /></PageLoader> },
+        { path: 'Optovim', element: <PageLoader><Optovim /></PageLoader> },
+        { path: 'recovery-password', element: <PageLoader><RecoveryPassword /></PageLoader> },
+        { path: 'registration', element: <PageLoader><Registration /></PageLoader> },
+        { path: 'Basket', element: <PageLoader><Basket /></PageLoader> },
+        { path: 'children-furniture', element: <PageLoader><ChildrenFurniture /></PageLoader> },
+        { path: 'children-furniture/:slug', element: <PageLoader><FurnitureCategory /></PageLoader> },
+        { path: 'product/:id', element: <PageLoader><ProductInfo /></PageLoader> },
+        { path: 'favorites', element: <PageLoader><Favorites /></PageLoader> },
+        { path: 'personal-data', element: <PageLoader><PersonalData /></PageLoader> },
+        { path: 'checkout', element: <PageLoader><Checkout /></PageLoader> },
+        { path: 'card-payment', element: <PageLoader><CardPayment /></PageLoader> },
+      ],
+    },
+    {
+      path: '/thank-you',
+      element: <PageLoader><ThankYou /></PageLoader>,
+    },
+    {
+      path: '*',
+      element: <NotFound />,
+    },
+  ]);
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    <AuthProvider>
+      <CartProvider>
+        <FavoritesProvider>
+          <RouterProvider router={router} />
+        </FavoritesProvider>
+      </CartProvider>
+    </AuthProvider>
+  );
 }
-
-export default App
