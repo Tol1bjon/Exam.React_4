@@ -12,6 +12,7 @@ import { CartContext } from '../../../context/CartContext';
 import { FavoritesContext } from '../../../context/FavoritesContext';
 import { AuthContext } from '../../../context/AuthContext';
 import { useNavigate } from 'react-router';
+import { useLanguage } from '../../../context/LanguageContext';
 
 const Section7Home = () => {
     const [cards, setCards] = useState([]);
@@ -22,6 +23,7 @@ const Section7Home = () => {
     const { toggleFavorite, isFavorited } = useContext(FavoritesContext);
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
+    const { t } = useLanguage();
 
     async function getCards() {
         try {
@@ -102,7 +104,7 @@ const Section7Home = () => {
                     fontSize: { xs: '24px', md: '32px' }
                 }}
             >
-                Популярные товары
+                {t('Популярные товары')}
             </Typography>
 
             {/* Контейнер слайдера с прокруткой */}
@@ -218,7 +220,7 @@ const Section7Home = () => {
                             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, alignItems: 'center' }}>
                                 <Box component={motion.div} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                                     <Box onClick={() => handleAddToCartClick(el)} sx={{ cursor: 'pointer', width: '100%', display: 'flex', justifyContent: 'center' }}>
-                                        <Button onClick={() => handleAddToCartClick(el)} text={"В корзину"} />
+                                        <Button onClick={() => handleAddToCartClick(el)} text={t('В корзину')} />
                                     </Box>
                                 </Box>
                                 
@@ -233,7 +235,7 @@ const Section7Home = () => {
                                         '&:hover': { color: '#334D5C', textDecoration: 'underline' }
                                     }}
                                 >
-                                    Купить в один клик
+                                    {t('Купить в один клик')}
                                 </Typography>
                             </Box>
                         </Box>

@@ -69,6 +69,12 @@ const commonTranslations = {
   'Самовывоз': 'Pickup', 'Транспортная компания': 'Transport company', 'Наличными при получении': 'Cash on delivery',
   'Заказ принят в обработку.': 'Your order is being processed.', 'Оплата и доставка': 'Payment and delivery',
   'Смотреть все акции': 'View all sales', 'Назад': 'Back', 'Город:': 'City:',
+  'Все самое необходимое для вашего ребенка': 'Everything your child needs',
+  'Посмотрите нашу новую подборку для ухода за вашим ребенком': 'Explore our new collection for caring for your child',
+  'Все детские костюмы с акцией 10%': 'All children’s outfits with 10% off',
+  'Карапуз - это онлайн гипермаркет товаров для детей. С нами вырастают поколения!': 'Karapuz is an online hypermarket for children’s products. Generations grow with us!',
+  'Выгодное предложение': 'Great offer', 'Популярные товары': 'Popular products',
+  'Товар добавлен в корзину': 'Product added to cart', 'Перейти в корзину': 'Go to cart',
 };
 
 const reverseTranslations = Object.fromEntries(Object.entries(commonTranslations).map(([ru, en]) => [en, ru]));

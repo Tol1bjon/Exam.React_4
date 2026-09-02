@@ -4,8 +4,10 @@ import { motion } from 'motion/react';
 import kid from '../assets/Group 248.png';
 import Button from './Button';
 import img1 from '../assets/Ellipse 18.png';
+import { useLanguage } from '../context/LanguageContext';
 
 const Section1 = () => {
+    const { t } = useLanguage();
     return (
         <Box sx={{ backgroundColor: "#FCF6F5", paddingY: { xs: "30px", md: "40px" }, overflow: 'hidden' }}>
             <Box sx={{
@@ -49,7 +51,7 @@ const Section1 = () => {
                             lineHeight: { xs: 1.2, md: 1.1 }
                         }}
                     >
-                        Все самое необходимое для вашего ребенка
+                        {t('Все самое необходимое для вашего ребенка')}
                     </Typography>
 
                     <Typography 
@@ -60,10 +62,10 @@ const Section1 = () => {
                             fontSize: { xs: "15px", md: "17px" }
                         }}
                     >
-                        Посмотрите нашу новую подборку для ухода за вашим ребенком
+                        {t('Посмотрите нашу новую подборку для ухода за вашим ребенком')}
                     </Typography>
 
-                    <Button text={"Смотреть"} to={"/"} />
+                    <Button text={t('Смотреть')} to={"/"} />
 
                     {/* Плавающие декоративные круги (на мобилках скрываем или уменьшаем для аккуратности) */}
                     <Box sx={{ display: { lg: "block", xs: "none" }, position: "absolute", bottom: "100px", right: "770px" }} component={"img"} src={img1} />

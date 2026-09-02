@@ -1,9 +1,8 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams, NavLink } from 'react-router';
 import { Box, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
-import { Blog as BlogApi } from '../API/Blog';
+   import { getBlogItems } from '../API/contentData';
 
 const BlogInfo = () => {
     const { id } = useParams();
@@ -11,8 +10,7 @@ const BlogInfo = () => {
 
     async function fetchBlog() {
         try {
-            let { data } = await axios.get(BlogApi);
-            const blogArray = Array.isArray(data) ? data : data.Blog || [];
+               const blogArray = await getBlogItems();
             const found = blogArray.find(item => String(item.id) === String(id));
             setBlogItem(found || blogArray[0]);
         } catch (error) {

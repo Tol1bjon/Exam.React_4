@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { NavLink, useNavigate } from 'react-router';
-import axios from 'axios';
-import { Blog as BlogApi } from '../../API/Blog';
+import { getBlogItems } from '../../API/contentData';
 
 const Blog = () => {
     const [blogs, setBlogs] = useState([]);
@@ -13,10 +12,8 @@ const Blog = () => {
 
     async function fetchBlogs() {
         try {
-            let { data } = await axios.get(BlogApi);
-            // Безопасное извлечение массива из структуры данных
-            const blogArray = Array.isArray(data) ? data : data.Blog || [];
-            setBlogs(blogArray);
+            const data = await getBlogItems();
+            setBlogs(data);
         } catch (error) {
             console.log(error);
         }

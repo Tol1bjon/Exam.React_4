@@ -5,6 +5,7 @@ import one from '../../../assets/Group 42.png';
 import two from '../../../assets/Group 43.png';
 import three from '../../../assets/Group 44.png';
 import four from '../../../assets/Group 45.png';
+import { useLanguage } from '../../../context/LanguageContext';
 
 const features = [
     { img: one, text: 'Все товары для детей в одном месте' },
@@ -14,6 +15,7 @@ const features = [
 ];
 
 const Section8Home = () => {
+    const { t } = useLanguage();
     return (
         <Box 
             component={motion.div}
@@ -47,7 +49,7 @@ const Section8Home = () => {
                     mx: 'auto'
                 }}
             >
-                Карапуз - это онлайн гипермаркет товаров для детей. С нами вырастают поколения!
+                {t('Карапуз - это онлайн гипермаркет товаров для детей. С нами вырастают поколения!')}
             </Typography>
 
             {/* Сетка карточек */}
@@ -104,7 +106,7 @@ const Section8Home = () => {
                                 lineHeight: 1.3
                             }}
                         >
-                            {item.text}
+                            {t(item.text)}
                         </Typography>
                     </Box>
                 ))}

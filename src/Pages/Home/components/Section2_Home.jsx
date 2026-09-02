@@ -11,6 +11,7 @@ import { CartContext } from '../../../context/CartContext';
 import { FavoritesContext } from '../../../context/FavoritesContext';
 import { AuthContext } from '../../../context/AuthContext';
 import { useNavigate } from 'react-router';
+import { useLanguage } from '../../../context/LanguageContext';
 
 // Свайпер
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -30,6 +31,7 @@ const Section2Home = () => {
     const { toggleFavorite, isFavorited } = useContext(FavoritesContext);
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
+    const { t } = useLanguage();
 
     const getCards = async () => {
         try {
@@ -164,7 +166,7 @@ const Section2Home = () => {
                                         </IconButton>
 
                                         <Typography sx={{ fontSize: '14px', fontWeight: 500, color: '#334D5C', mb: 2 }}>
-                                            Товар добавлен в корзину
+                                            {t('Товар добавлен в корзину')}
                                         </Typography>
 
                                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
@@ -202,7 +204,7 @@ const Section2Home = () => {
                                                 '&:hover': { backgroundColor: '#72B5E8', color: '#fff' }
                                             }}
                                         >
-                                            Перейти в корзину
+                                            {t('Перейти в корзину')}
                                         </Box>
                                     </Box>
                                 )}
@@ -237,7 +239,7 @@ const Section2Home = () => {
                                 </Typography>
                                 <Box sx={{ display: 'flex', gap: 2, alignItems: "center" }}>
                                     <Box component={motion.div} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                                        <Button onClick={() => handleAddToCartClick(el)} text={"В корзину"} />
+                                        <Button onClick={() => handleAddToCartClick(el)} text={t('В корзину')} />
                                     </Box>
                                     <Typography 
                                         component={motion.span}
@@ -245,7 +247,7 @@ const Section2Home = () => {
                                         onClick={() => handleBuyNowClick(el)}
                                         sx={{ fontSize: '12px', color: '#7E929D', textAlign: 'center', cursor: 'pointer' }}
                                     >
-                                        Купить в один клик
+                                        {t('Купить в один клик')}
                                     </Typography>
                                 </Box>
                             </Box>
@@ -425,10 +427,10 @@ const Section2Home = () => {
 
                                     <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                                         <Box component={motion.div} whileTap={{ scale: 0.97 }}>
-                                            <Button onClick={() => handleAddToCartClick(el)} text={"В корзину"} />
+                                            <Button onClick={() => handleAddToCartClick(el)} text={t('В корзину')} />
                                         </Box>
                                         <Typography onClick={() => handleBuyNowClick(el)} sx={{ fontSize: '13px', color: '#72B5E8', cursor: 'pointer' }}>
-                                            Купить в один клик
+                                            {t('Купить в один клик')}
                                         </Typography>
                                     </Box>
                                 </Box>

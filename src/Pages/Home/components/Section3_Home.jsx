@@ -4,10 +4,12 @@ import { Box, Typography } from '@mui/material';
 import Button2 from '../../../Layout/Button2';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router';
+import { useLanguage } from '../../../context/LanguageContext';
 
 const Section3Home = () => {
     const [cards, setCards] = useState([]);
     const navigate = useNavigate();
+    const { t } = useLanguage();
 
     async function getCards() {
         try {
@@ -53,7 +55,7 @@ const Section3Home = () => {
                     fontSize: { xs: '24px', md: '32px' }
                 }}
             >
-                Популярные категории
+                {t('Популярные категории')}
             </Typography>
 
             {/* Контейнер карточек */}
@@ -101,7 +103,7 @@ const Section3Home = () => {
                             
                             <Box component={motion.div} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                                 <Button2
-                                    text={"Смотреть"}
+                                    text={t('Смотреть')}
                                     onClick={() => navigate(`/product/${el.id}`)}
                                 />
                             </Box>

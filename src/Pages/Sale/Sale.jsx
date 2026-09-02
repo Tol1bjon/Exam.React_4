@@ -2,16 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import { NavLink, useNavigate } from 'react-router';
-import axios from 'axios';
-import { Sale as SaleApi } from '../../API/Sale';
+import { getSaleItems } from '../../API/contentData';
 
 const Sale = () => {
     const [sale, setSale] = useState([]);
 
     async function saleCards() {
         try {
-            let { data } = await axios.get(SaleApi);
-            setSale(Array.isArray(data) ? data : data.Sale || []);
+            const data = await getSaleItems();
+            setSale(data);
         } catch (error) {
             console.log(error);
         }

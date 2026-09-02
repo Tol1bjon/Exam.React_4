@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useParams, NavLink, useLocation } from 'react-router';
-import axios from 'axios';
-import { Sale as SaleApi } from '../API/Sale';
+   import { getSaleItems } from '../API/contentData';
 
 const SaleInfo = () => {
     const { id } = useParams();
@@ -13,8 +12,7 @@ const SaleInfo = () => {
     useEffect(() => {
         async function fetchSaleItem() {
             try {
-                let { data } = await axios.get(SaleApi);
-                const items = Array.isArray(data) ? data : data.Sale || [];
+                   const items = await getSaleItems();
                 const found = items.find(item => String(item.id) === String(id));
                 if (found) {
                     setSaleItem(found);
