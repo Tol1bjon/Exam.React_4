@@ -41,15 +41,42 @@ const commonTranslations = {
   'Только в наличии': 'In stock only', 'Сбросить все': 'Reset all', 'Поиск': 'Search', 'По популярности': 'Popular',
   'Сначала дешевые': 'Price: low to high', 'Сначала дорогие': 'Price: high to low', 'По новизне': 'Newest',
   'Пока нет отзывов': 'No reviews yet', 'Отзывы': 'Reviews', 'Описание': 'Description', 'Характеристики': 'Specifications',
+  'Дальше': 'Next', 'Читать': 'Read', 'Смотреть костюмы': 'View costumes', 'Сообщение': 'Message',
+  'Электронный адрес': 'Email address', 'Ваш электронный адрес': 'Your email address', 'Пароль': 'Password',
+  'Повторите пароль': 'Repeat password', 'Пользователь': 'User', 'Пожалуйста, введите email': 'Please enter email',
+  'Заполните все поля': 'Fill in all fields', 'Пароли не совпадают': 'Passwords do not match',
+  'Пароль должен быть минимум 6 символов': 'Password must be at least 6 characters',
+  'Успешная регистрация': 'Registration successful', 'Успешный вход': 'Login successful',
+  'Неверный email или пароль': 'Incorrect email or password', 'Некорректный email': 'Invalid email',
+  'Email не найден': 'Email not found', 'Инструкции отправлены на почту': 'Instructions sent by email',
+  'Введите пароль': 'Enter password', 'Введите имя': 'Enter your name', 'Введите корректный email': 'Enter a valid email',
+  'Введите корректный телефон': 'Enter a valid phone number', 'Есть': 'Yes', 'Нет': 'No',
+  'Комоды': 'Dressers', 'Пеленаторы': 'Changing tables', 'Подростковые кровати': 'Teen beds',
+  'Прогулочные': 'Strollers', 'Трансформеры 2в1': '2-in-1 transformers', 'Для двойни': 'For twins',
+  'Аксессуары для колясок': 'Stroller accessories', '0–13 кг': '0–13 kg', '9–18 кг': '9–18 kg', '15–36 кг': '15–36 kg',
+  'Для новорождённых': 'For newborns', 'Для мальчиков': 'For boys', 'Для девочек': 'For girls',
+  'Верхняя одежда': 'Outerwear', 'Бутылочки': 'Bottles', 'Смеси': 'Formula', 'Стульчики для кормления': 'High chairs',
+  'Посуда': 'Tableware', 'Подгузники': 'Diapers', 'Косметика': 'Cosmetics', 'Аксессуары для купания': 'Bath accessories',
+  'Развивающие': 'Educational', 'Интерактивные': 'Interactive', 'Конструкторы': 'Building sets',
+  'Маленький': 'Small', 'Средний': 'Medium', 'Большой': 'Large', 'Белый': 'White', 'Берёза': 'Birch',
+  'Бук': 'Beech', 'Дуб': 'Oak', 'Ольха': 'Alder', 'Сосна': 'Pine', 'ЛДСП': 'Chipboard', 'МДФ': 'MDF', 'Ясень': 'Ash',
+  'Официальные дилеры лучших мировых производителей': 'Official dealers of the world’s best manufacturers',
+  'Собственное эко-производство': 'In-house eco production', 'Цены ниже, чем у конкурентов': 'Prices lower than competitors',
+  'Все товары для детей в одном месте': 'All children’s products in one place', 'Только в наличии': 'In stock only',
+  'Цена, ₽': 'Price, ₽', 'от': 'from', 'до': 'to', 'Колеса': 'Wheels', 'Ящик': 'Drawer', 'Маятник': 'Pendulum',
+  'Мои заказы': 'My orders', 'Заказ №': 'Order no.', 'Товаров по выбранным фильтрам не найдено': 'No products match the selected filters',
+  'Показано': 'Showing', 'из': 'of', 'Количество': 'Quantity', 'Курьерская доставка': 'Courier delivery',
+  'Самовывоз': 'Pickup', 'Транспортная компания': 'Transport company', 'Наличными при получении': 'Cash on delivery',
+  'Заказ принят в обработку.': 'Your order is being processed.', 'Оплата и доставка': 'Payment and delivery',
+  'Смотреть все акции': 'View all sales', 'Назад': 'Back', 'Город:': 'City:',
 };
 
+const reverseTranslations = Object.fromEntries(Object.entries(commonTranslations).map(([ru, en]) => [en, ru]));
 const translateText = (value, language) => {
-  if (language === 'ru') {
-    return Object.prototype.hasOwnProperty.call(commonTranslations, value)
-      ? Object.keys(commonTranslations).find((key) => commonTranslations[key] === value) || value
-      : value;
-  }
-  return translations.en[value] || commonTranslations[value] || value;
+  const dictionary = language === 'en' ? commonTranslations : reverseTranslations;
+  return Object.keys(dictionary)
+    .sort((a, b) => b.length - a.length)
+    .reduce((text, source) => text.split(source).join(dictionary[source]), value);
 };
 
 export const LanguageContext = createContext(null);
@@ -73,10 +100,18 @@ export const LanguageProvider = ({ children }) => {
         if (node.parentElement && !['SCRIPT', 'STYLE', 'INPUT', 'TEXTAREA'].includes(node.parentElement.tagName)) nodes.push(node);
       }
       nodes.forEach((textNode) => {
-        const translated = translateText(textNode.nodeValue.trim(), language);
-        if (translated !== textNode.nodeValue.trim() && textNode.nodeValue.trim()) {
-          textNode.nodeValue = textNode.nodeValue.replace(textNode.nodeValue.trim(), translated);
+        const original = textNode.nodeValue;
+        const translated = translateText(original, language);
+        if (translated !== original && original.trim()) {
+          textNode.nodeValue = translated;
         }
+      });
+
+      document.querySelectorAll('[placeholder], [title], [aria-label]').forEach((element) => {
+        ['placeholder', 'title', 'aria-label'].forEach((attribute) => {
+          const value = element.getAttribute(attribute);
+          if (value) element.setAttribute(attribute, translateText(value, language));
+        });
       });
     };
 
