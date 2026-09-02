@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
 import { Box, Typography } from '@mui/material';
-import axios from 'axios';
-import { API } from '../../../API/API';
+import { getCards as getCardsData } from '../../../API/cardsData';
 import Button from '../../../Layout/Button';
 import AuthRequiredModal from '../../../Layout/AuthRequiredModal';
 import { motion } from 'framer-motion';
@@ -26,7 +25,7 @@ const Section7Home = () => {
 
     async function getCards() {
         try {
-            let { data } = await axios.get(API);
+            const data = await getCardsData();
             setCards(data);
         } catch (error) {
             console.log(error);

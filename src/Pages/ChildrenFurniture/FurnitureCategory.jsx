@@ -10,8 +10,7 @@ import {
   Chip,
 } from '@mui/material';
 import { NavLink, useParams } from 'react-router';
-import axios from 'axios';
-import { API } from '../../API/API';
+import { getCards } from '../../API/cardsData';
 import { FURNITURE_CATEGORIES, enrichProduct, parsePrice } from '../../utils/furniture';
 import ProductCard from '../../Layout/ProductCard';
 import CatalogPagination, { PAGE_SIZE } from '../../Layout/CatalogPagination';
@@ -80,7 +79,7 @@ const FurnitureCategory = () => {
   const { showAuthModal, setShowAuthModal } = useProductActions();
 
   useEffect(() => {
-    axios.get(API).then(({ data }) => {
+    getCards().then((data) => {
       setProducts((Array.isArray(data) ? data : []).map(enrichProduct));
     }).catch(() => setProducts([]));
   }, []);

@@ -1,7 +1,6 @@
-import axios from 'axios';
+import { getCards as getCardsData } from '../../../API/cardsData';
 import React, { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
-import { API } from '../../../API/API';
 import Button2 from '../../../Layout/Button2';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router';
@@ -12,7 +11,7 @@ const Section3Home = () => {
 
     async function getCards() {
         try {
-            let { data } = await axios.get(API);
+            const data = await getCardsData();
             setCards(data);
         } catch (error) {
             console.log(error);

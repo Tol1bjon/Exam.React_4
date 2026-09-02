@@ -11,12 +11,11 @@ import {
   Modal,
 } from '@mui/material';
 import { NavLink, useParams } from 'react-router';
-import axios from 'axios';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CloseIcon from '@mui/icons-material/Close';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { API } from '../../API/API';
+import { getCards } from '../../API/cardsData';
 import { enrichProduct, formatPrice } from '../../utils/furniture';
 import { useProductActions } from '../../hooks/useProductActions';
 import AuthRequiredModal from '../../Layout/AuthRequiredModal';
@@ -30,7 +29,7 @@ const ProductInfo = () => {
   const { handleAddToCart, handleFavorite, isFavorited, showAuthModal, setShowAuthModal } = useProductActions();
 
   useEffect(() => {
-    axios.get(API).then(({ data }) => {
+    getCards().then((data) => {
       const found = (Array.isArray(data) ? data : []).find((item) => String(item.id) === String(id));
       if (found) {
         const enriched = enrichProduct(found);

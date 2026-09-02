@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Box, Typography, IconButton } from '@mui/material';
-import { API } from '../../../API/API';
-import axios from 'axios';
+import { getCards as getCardsData } from '../../../API/cardsData';
 import Button from '../../../Layout/Button';
 import AuthRequiredModal from '../../../Layout/AuthRequiredModal';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -34,7 +33,7 @@ const Section2Home = () => {
 
     const getCards = async () => {
         try {
-            let { data } = await axios.get(API);
+            const data = await getCardsData();
             setCards(data);
         } catch (error) {
             console.log(error);

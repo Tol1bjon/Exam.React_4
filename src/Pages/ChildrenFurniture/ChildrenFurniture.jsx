@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Box, Typography, Breadcrumbs, Link as MuiLink, MenuItem, Select } from '@mui/material';
 import { NavLink, useNavigate } from 'react-router';
-import axios from 'axios';
-import { API } from '../../API/API';
+import { getCards } from '../../API/cardsData';
 import { FURNITURE_CATEGORIES, enrichProduct, parsePrice } from '../../utils/furniture';
 import ProductCard from '../../Layout/ProductCard';
 import CatalogPagination, { PAGE_SIZE } from '../../Layout/CatalogPagination';
@@ -18,7 +17,7 @@ const ChildrenFurniture = () => {
   const { showAuthModal, setShowAuthModal } = useProductActions();
 
   useEffect(() => {
-    axios.get(API).then(({ data }) => {
+    getCards().then((data) => {
       setProducts((Array.isArray(data) ? data : []).map(enrichProduct));
     }).catch(() => setProducts([]));
   }, []);
