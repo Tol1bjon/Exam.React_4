@@ -96,6 +96,7 @@ const Header = () => {
   const [mobileCatalogOpen, setMobileCatalogOpen] = useState(false);
   const [mobileProfileOpen, setMobileProfileOpen] = useState(false);
   const [mobileActiveCategory, setMobileActiveCategory] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const catalogRef = useRef(null);
   const loginRef = useRef(null);
@@ -162,6 +163,20 @@ const Header = () => {
     if (e.key === 'Enter') {
       handleLogin();
     }
+  };
+
+  const handleSearch = () => {
+    const query = searchQuery.trim();
+    if (!query) {
+      navigate('/children-furniture');
+      return;
+    }
+
+    navigate(`/children-furniture?search=${encodeURIComponent(query)}`);
+  };
+
+  const handleSearchKeyPress = (e) => {
+    if (e.key === 'Enter') handleSearch();
   };
 
   return (
@@ -249,6 +264,9 @@ const Header = () => {
           <SearchIcon sx={{ color: COLORS.textMuted, mr: 1 }} fontSize="small" />
           <InputBase
             placeholder={t('Я хочу купить...')}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleSearchKeyPress}
             sx={{ flex: 1, fontSize: 14, color: COLORS.text }}
           />
         </Box>
@@ -720,6 +738,9 @@ const Header = () => {
           <SearchIcon sx={{ color: COLORS.textMuted, mr: 1 }} fontSize="small" />
           <InputBase
             placeholder={t('Я хочу купить...')}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleSearchKeyPress}
             sx={{ flex: 1, fontSize: 14, color: COLORS.text }}
           />
           <Button
@@ -734,6 +755,7 @@ const Header = () => {
               px: 2.5,
               '&:hover': { bgcolor: '#4CB2D1' },
             }}
+            onClick={handleSearch}
           >
             {t('Найти')}
           </Button>

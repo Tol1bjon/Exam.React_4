@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Box, Typography, Breadcrumbs, Link as MuiLink, MenuItem, Select } from '@mui/material';
-import { NavLink, useNavigate } from 'react-router';
+import { NavLink, useNavigate, useSearchParams } from 'react-router';
 import { getCards } from '../../API/cardsData';
 import { FURNITURE_CATEGORIES, enrichProduct, parsePrice } from '../../utils/furniture';
 import ProductCard from '../../Layout/ProductCard';
@@ -13,6 +13,7 @@ const ChildrenFurniture = () => {
   const [sort, setSort] = useState('popular');
   const [page, setPage] = useState(1);
   const [extra, setExtra] = useState(0);
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { showAuthModal, setShowAuthModal } = useProductActions();
 
@@ -23,12 +24,13 @@ const ChildrenFurniture = () => {
   }, []);
 
   const sorted = useMemo(() => {
-    const list = [...products];
+    const query = searchParams.get('search')?.trim().toLowerCase() || '';
+    const list = products.filter((product) => product.title?.toLowerCase().includes(query));
     if (sort === 'price-asc') list.sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
     if (sort === 'price-desc') list.sort((a, b) => parsePrice(b.price) - parsePrice(a.price));
     if (sort === 'new') list.sort((a, b) => Number(b.isNew) - Number(a.isNew));
     return list;
-  }, [products, sort]);
+  }, [products, searchParams, sort]);
 
   const start = (page - 1) * PAGE_SIZE;
   const visible = sorted.slice(start, start + PAGE_SIZE + extra);
